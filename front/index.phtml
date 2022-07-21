@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <title>Rame Océan</title>
+    <link rel="shortcut icon" type="image/x-icon" href="front/img/favicon.ico">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Rame océan est une association qui propose et organise des traversées océanique à la rame pour toute personne motivée, de l'Atlantique et de la Méditerranée.">
+
+    <!-- Facebook Meta Tags -->
+    <meta property="og:url" content="https://www.rameocean.fr/">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Rame Océan">
+    <meta property="og:description" content="Rame océan est une association qui propose et organise des traversées océanique à la rame pour toute personne motivée, de l'Atlantique et de la Méditerranée.">
+    <meta property="og:image" content="https://www.rameocean.fr/uploads/rame-ocean-social-card.png">
+
+    <!-- Twitter Meta Tags -->
+    <meta property="twitter:url" content="https://www.rameocean.fr/">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Rame Océan">
+    <meta property="twitter:domain" content="rameocean.fr">
+    <meta name="twitter:description" content="Rame océan est une association qui propose et organise des traversées océanique à la rame pour toute personne motivée, de l'Atlantique et de la Méditerranée.">
+    <meta name="twitter:image" content="https://www.rameocean.fr/uploads/rame-ocean-social-card.png">
+
+    <!-- GOOGLE FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@100;400;600;700&family=Quicksand:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tw-elements/dist/css/index.min.css" />
+    <link rel="stylesheet" href="front/css/normalize.css" type="text/css">
+    <link rel="stylesheet" href="front/css/style.css" type="text/css">
+    <link rel="stylesheet" href="front/css/timeline.css" type="text/css">
+    <link rel="stylesheet" href="front/css/gallery.css" type="text/css">
+
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+                new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+            'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','GTM-NT5BWNJ');
+    </script>
+    <!-- End Google Tag Manager -->
+
+</head>
+
+<body>
+
+    <!-- Google Tag Manager (noscript) -->
+    <noscript>
+        <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NT5BWNJ" height="0" width="0" style="display:none;visibility:hidden"></iframe>
+    </noscript>
+    <!-- End Google Tag Manager (noscript) -->
+        <header id="desktopHeader">
+
+        <a href="#carouselExampleCaptions"><img src="front/img/logo_rame_ocean.png" alt="Logo de l'association Rame Océan"></a>
+        <nav>
+            <?php if($isIncoming):?>
+                <a href="#incoming">Prochaine traversée</a>
+            <?php endif ?>
+            <a href="#timeline">Traversées réalisées</a>
+            <a href="#partners">Partenaires</a>
+            <a href="#gallery">Images</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
+
+    <nav class="fixedHeader" style="pointer-events: none">
+        <?php if($isIncoming):?>
+            <a href="#incoming">Prochaine traversée</a>
+        <?php endif ?>
+        <a href="#timeline">Traversées réalisées</a>
+        <a href="#partners">Partenaires</a>
+        <a href="#gallery">Images</a>
+        <a href="#contact">Contact</a>
+
+        <div class="social-media">
+            <a href="https://www.facebook.com/rameocean" target="_blank"><i class="icon-facebook"></i></a>
+            <a href="https://twitter.com/FavrePatrick" target="_blank"><i class="icon-twitter"></i></a>
+            <a href="https://www.instagram.com/rameocean/" target="_blank"><i class="icon-insta"></i></a>
+        </div>
+    </nav>
+
+    <header id="mobileHeader">
+        <div class="waves-container">
+            <a href="#carouselExampleCaptions"><img src="front/img/logo_rame_ocean_without_baseline.png" alt="Logo de l'association Rame Océan"></a>
+            <nav>
+                <?php if($isIncoming):?>
+                    <a href="#incoming">Prochaine traversée</a>
+                <?php endif ?>
+                <a href="#timeline">Traversées réalisées</a>
+                <a href="#partners">Partenaires</a>
+                <a href="#gallery">Images</a>
+                <a href="#contact">Contact</a>
+                <div class="social-media">
+                    <a href="https://www.facebook.com/rameocean" target="_blank"><i class="icon-facebook"></i></a>
+                    <a href="https://twitter.com/FavrePatrick" target="_blank"><i class="icon-twitter"></i></a>
+                    <a href="https://www.instagram.com/rameocean/" target="_blank"><i class="icon-insta"></i></a>
+                </div>
+            </nav>
+            <canvas></canvas>
+        </div>
+    </header>
+
+    <div class="burger">
+        <div class="menu-wrapper">
+            <div class="line half start"></div>
+            <div class="line"></div>
+            <div class="line half end"></div>
+        </div>
+    </div>
+
+    <main>
+        <a href="#carouselExampleCaptions" class="arrow-up" style="pointer-events: none">
+            <img src="front/img/arrow_up.png" alt="icône pour remonter en haut de la page">
+        </a>
+
+        <div id="carouselExampleCaptions" class="carousel slide relative" data-bs-ride="carousel">
+            <div class="carousel-indicators absolute right-0 bottom-0 left-0 flex justify-center p-0 mb-4">
+                <?php for ($i = 0; $i < count($banners); $i++) {
+                    $active = $i === 0 ? 'active' : '' ;
+                    $current = $i === 0;
+                    $ariaLabel = $i + 1;
+                    echo "<button type='button' data-bs-target='#carouselExampleCaptions' data-bs-slide-to='$i' class='$active' aria-current='$current' aria-label='Slide $ariaLabel'></button>";
+                } ?>
+            </div>
+
+            <div class="carousel-inner relative w-full overflow-hidden">
+
+                <?php foreach($banners as $banner): ?>
+                    <figure class="carousel-item <?php echo $banner === $banners[0] ? 'active' : '' ?> relative float-left w-full">
+                        <img src="uploads/banner/<?=$banner['picture']?>" class="block w-full" alt="<?=$banner['alt']?>"/>
+                        <figcaption class="carousel-caption md:block absolute text-center">
+                            <h1 class="mb-0 pb-0"><?=$banner['title']?></h1>
+                        </figcaption>
+                    </figure>
+                <?php endforeach ?>
+            </div>
+
+            <!-- BUTTON PREV -->
+            <button class="carousel-control-prev absolute top-0 bottom-0 flex items-center justify-center p-0 text-center border-0 hover:outline-none hover:no-underline focus:outline-none focus:no-underline left-0"
+                    type="button"
+                    data-bs-target="#carouselExampleCaptions"
+                    data-bs-slide="prev">
+                <span class="carousel-control-prev-icon inline-block bg-no-repeat" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+
+            <!-- BUTTON NEXT -->
+            <button class="carousel-control-next absolute top-0 bottom-0 flex items-center justify-center p-0 text-center border-0 hover:outline-none hover:no-underline focus:outline-none focus:no-underline right-0"
+                    type="button"
+                    data-bs-target="#carouselExampleCaptions"
+                    data-bs-slide="next">
+                <span class="carousel-control-next-icon inline-block bg-no-repeat" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+
+        </div>
+
+        <!-- INFOS -->
+        <div id="infos" class="custom-container">
+            <h1 class="mt-6 text-center uppercase logo">Rame <span>océan</span></h1>
+            <section id="offers" class="mt-2 text-center">
+                <div class="offer">
+                    <img src="front/img/rames.png" alt="">
+                    <p>Vous prépare pour votre traversée à la rame (solo ou équipage)</p>
+                </div>
+                <div class="offer">
+                    <img src="front/img/prepare.png" alt="">
+                    <p>Recherche et prépare votre bateau</p>
+                </div>
+                <div class="offer">
+                    <img src="front/img/skipper.png" alt="">
+                    <p>Vous intègre dans un de nos équipages</p>
+                </div>
+                <div class="offer">
+                    <img src="front/img/equipage.png" alt="">
+                    <p>Vous prépare mentalement et physiquement</p>
+                </div>
+                <div class="offer">
+                    <img src="front/img/router.png" alt="">
+                    <p>Effectue votre routage</p>
+                </div>
+            </section>
+
+            <?php if($isIncoming):?>
+                <a href="#incoming" class="bevel-btn">Découvrez la prochaine traversée !</a>
+            <?php endif ?>
+
+        </div>
+
+        <!-- PATRICK -->
+        <section id="patrick">
+            <div class="darkblue-overlay"></div>
+            <div class="custom-container">
+                <img src="uploads/profile/<?=$profile['picture']?>" alt="<?=$profile['alt']?>"/>
+                <div class="text-white pl-6">
+                    <h5 class="text-xl font-medium mb-2 font-bold"><?=$profile['title']?></h5>
+                    <div><?=$profile['description']?></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- INCOMING -->
+        <?php if($isIncoming):?>
+            <section id="incoming" class="custom-container">
+                <h1 class="text-marine uppercase font-bold text-center">Prochaine traversée</h1>
+                <div class="card">
+                    <section class="card-infos">
+                        <h2><?=$incoming['title']?></h2>
+                        <small><?=$incoming['start_at']?></small>
+                        <div class="pills">
+                            <p class="pill bg-orange"><span class="number"><?=$incoming['rower']?></span> rameur<?php echo $incoming['rower'] > 1 ? 's' : '' ?></p>
+                            <p class="pill bg-blue"><span class="number"><?=$incoming['seat_left']?></span> place<?php echo $incoming['seat_left'] > 1 ? 's' : '' ?> restante<?php echo $incoming['seat_left'] > 1 ? 's' : '' ?></p>
+                        </div>
+                        <?php if(!$incoming['seat_left']):?>
+                            <div class="complete">
+                                <p>Il n'y a plus de place pour cette traversée mais nous en organiserons d'autres.</p>
+                                <p>N'hésitez pas à nous contacter à l'aide du <a href="#contact">formulaire de contact</a> !</p>
+                            </div>
+                        <?php else :?>
+                            <div><?=$incoming['description']?></div>
+                        <?php endif ?>
+                    </section>
+                    <figure>
+                        <img src="front/img/rame-ocean-prochaine-traversee.png" alt="Photo d'un rameur">
+                    </figure>
+                </div>
+            </section>
+        <?php endif ?>
+
+
+        <!-- TIMELINE -->
+        <section id="timeline">
+
+            <h1 class="text-marine uppercase font-bold text-center">Traversées réalisées</h1>
+            <small>Cliquez sur une année pour plus d'infos !</small>
+
+            <div class="flex-parent">
+                <div class="dot-flex-container">
+                    <?php foreach($trips as $trip): ?>
+                        <div class="dot <?php echo $trip === $trips[0] ? 'active' : '' ?>">
+                            <span data-year="<?=$trip['date']?>" data-info="<?=$trip['title']?>"></span>
+                        </div>
+                    <?php endforeach ?>
+                </div>
+
+                <div class="description-flex-container">
+
+                    <?php foreach($trips as $trip): ?>
+                        <article class="<?php echo $trip === $trips[0] ? 'active' : '' ?>">
+                            <?php if($trip['is_video']):?>
+                                <div class="text no-picture">
+                                    <iframe width="560" height="315" src="https://www.youtube.com/embed/<?=$trip['video_url']?>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                    <h5><?php echo $trip['subtitle'] ? $trip['subtitle'] : $trip['title'] ?></h5>
+                                    <div><?=$trip['description']?></div>
+                                </div>
+                            <?php else :?>
+                                <?php if($trip['picture']):?>
+                                    <div class="media">
+                                        <img src="uploads/trip/<?=$trip['picture']?>" alt="">
+                                    </div>
+                                <?php endif ?>
+                                <div class="text">
+                                    <h5><?php echo $trip['subtitle'] ? $trip['subtitle'] : $trip['title'] ?></h5>
+                                    <div><?=$trip['description']?></div>
+                                </div>
+                            <?php endif ?>
+                        </article>
+                    <?php endforeach ?>
+
+                </div>
+            </div>
+
+        </section>
+
+        <!-- PARTENAIRE -->
+        <section id="partners">
+            <h1 class="text-white uppercase font-bold text-center">Partenaires</h1>
+            <div class="custom-container">
+                <?php foreach($partners as $partner): ?>
+                    <figure>
+                        <figcaption><?= $partner['title'] ?></figcaption>
+                        <img src="uploads/partner/<?= $partner['picture'] ?>" alt="<?= $partner['alt'] ?>">
+                    </figure>
+                <?php endforeach ?>
+            </div>
+        </section>
+
+        <!-- GALLERY -->
+        <section id="gallery">
+
+            <h1 class="text-marine uppercase font-bold text-center">Galerie photo</h1>
+
+            <div id="image-gallery" class="grid grid-cols-8 md-grid-cols-3 gap-4">
+                <?php foreach($gallery as $picture): ?>
+                    <div class="image">
+                        <figure class="img-wrapper">
+                            <img class="img-responsive" src="uploads/gallery/<?= $picture['picture'] ?>" alt="<?= $picture['alt'] ?>">
+                            <figcaption class="img-overlay">
+                                <h3 class="fw-bold text-uppercase mb-3" data-title="<?= $picture['title'] ?>" data-credit="<?= $picture['credit'] ?>"><?= $picture['title'] ?></h3>
+                                <i class="icon-zoomin" aria-hidden="true"></i>
+                            </figcaption>
+                        </figure>
+                    </div>
+                <?php endforeach ?>
+            </div><!-- End image gallery -->
+        </section>
+
+        <section id="contact">
+            <div class="darkblue-overlay"></div>
+            <div class="form-container">
+                <h1 class="text-white uppercase font-bold text-center">Contact</h1>
+                <form method="post">
+
+                    <div class="form-group w-33 sm-w-100">
+                        <label for="firstname">Prénom</label>
+                        <input type="text" id="firstname" name="firstname"
+                               class="rounded-none rounded-lg bg-gray-50 border border-gray-300 text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                               placeholder="Jacques-Yves">
+                    </div>
+
+                    <div class="form-group w-33 sm-w-100">
+                        <label for="lastname">Nom</label>
+                        <input type="text" id="lastname" name="lastname"
+                               class="rounded-none rounded-lg bg-gray-50 border border-gray-300 text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                               placeholder="Cousteau">
+                    </div>
+
+                    <div class="form-group w-33 sm-w-100 phone">
+                        <label for="phone">Téléphone</label>
+                        <div class="flex">
+                            <input type="tel" id="phone" name="phone" onchange="removeError(document.querySelector('.phone .flex'))"
+                                   class="rounded-none rounded-lg bg-gray-50 border border-gray-300 text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                   placeholder="06 00 00 00 00">
+                        </div>
+                    </div>
+
+                    <div class="form-group w-50 sm-w-100">
+                        <label for="email" class="">Mail</label>
+                        <input type="email" id="email" name="email"
+                               class="rounded-none rounded-lg bg-gray-50 border border-gray-300 text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                               placeholder="mrcousteau@mail.com">
+                    </div>
+
+                    <div class="form-group w-50 sm-w-100">
+                        <label for="demand">Votre demande</label>
+                        <select id="demand" name="demand" onchange="removeError(this)"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            <option value="1">Sélectionnez un choix</option>
+                            <option value="traversee solo">Réaliser une traversée en solo</option>
+                            <option value="traversee equipage">Réaliser une traversée en équipage</option>
+                            <option value="logistique">Demande de logistique</option>
+                            <option value="routage">Demande de routage</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group w-100">
+                        <label for="content">Votre message</label>
+                        <textarea id="content" name="content" rows="4" onchange="removeError(this)"
+                                  class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Formulez votre demande"></textarea>
+                    </div>
+
+                    <button class="btn">Envoyer</button>
+
+                </form>
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- JS TAILWIND -->
+    <script src="https://cdn.jsdelivr.net/npm/tw-elements/dist/js/index.min.js"></script>
+    <!-- jQUERY -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- Custom JS -->
+    <script src="front/js/script.js"></script>
+    <script src="front/js/movingWaves.js"></script>
+    <script src="front/js/gallery.js"></script>
+</body>
+
+</html>

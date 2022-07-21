@@ -1,0 +1,150 @@
+<a href="index.php?name=trips" class="btn btn-secondary mb-3"><i class="fas fa-arrow-alt-circle-left pr-1"></i>Annuler</a>
+
+<form action="" id="file-upload-form" method="POST" enctype="multipart/form-data" class="form-horizontal form-material">
+    <div class="row">
+        <div class="col-lg-4 col-xlg-3 col-md-12">
+            <label class="col-md-12 pl-0 h3 text-primary text-center mb-2 pr-0" for="picture">Photo</label>
+            <div class="parent-div d-flex justify-content-center position-relative">
+                <input type="file" name="picture" id="file-upload" class="pointer" data-max-files="1" style="position:absolute;top:0;left:0;opacity:0"/>
+                <span id="file-upload-btn" class="btn btn-primary"><i class="fa fa-download text-white pr-2" aria-hidden="true"></i>Drag or clic</span>
+            </div>
+            <div class="form-group col-md-12 py-2 mb-0">
+                <label for="file-upload" id="file-drag" class="d-flex justify-content-center">
+                    <!-- EDITION : si on a une photo on l'affiche et on passe le nom de cette photo dans un champ caché ! -->
+                    <?php if($vars['oldPicture'] !== null) :?>
+                        <?php if($vars['is_video']) :?>
+                            <img src="http://i3.ytimg.com/vi/<?=$vars['video_url']?>/maxresdefault.jpg" class="d-block w-100">
+                        <?php else :?>
+                            <input type="hidden" name="oldPicture" value="<?=$vars['oldPicture']?>">
+                            <img id="file-image" src="../uploads/trip/<?=$vars['oldPicture']?>" class="hidden pt-2 d-block m-auto">
+                        <?php endif;?>
+                    <?php else:?>
+                        <img id="file-image" src="assets\img\download-icon.png" class="hidden pt-2 d-block m-auto">
+                    <?php endif;?>
+                    <div class="position-relative">
+                        <div id="start" style="left: 0; top: 0; opacity: 0; position: absolute;">
+                            <i class="fa fa-download" aria-hidden="true"></i>
+                            <div></div>
+                            <span id="file-upload-btn" class="btn btn-primary"></span>
+                            <div id="notimage" class="hidden"></div>
+                        </div>
+                        <div id="response" class="hidden" style="opacity:0;display:none">
+                            <div id="messages"></div>
+                            <progress class="progress" id="file-progress" value="0">
+                                <span>0</span>%
+                            </progress>
+                        </div>
+                </label>
+            </div>
+        </div>
+        <div class="parent-div d-flex justify-content-center flex-wrap">
+            <p class="form-text text-center">Pour modifier une image téléchargez en une nouvelle. Sinon l'ancienne sera conservée !</p>
+            <p class="text-secondary text-center">Taille max : <b>2 Mo</b></p>
+            <?php if(!empty($vars['errors']) && isset($vars['errors']['picture'])):?>
+                <p class="text-danger mb-0"><?=$vars['errors']['picture']?></p>
+            <?php endif ?>
+        </div>
+    </div>
+
+    <div class="col-lg-8 col-xlg-9 col-md-12" id="trip">
+        <div class="card">
+            <div class="card-body">
+
+                <div class="col-md-12 d-flex flex-wrap">
+                    <!-- DATE -->
+                    <div class="form-group col-md-4 mb-4">
+                        <label>Année</label>
+                        <div class="border-bottom p-0">
+                            <input type="text" name="date" value="<?=$vars['date']?>" class="form-control p-0 border-0">
+                        </div>
+                        <?php if(!empty($vars['errors']) && isset($vars['errors']['date'])):?>
+                            <p class="text-danger mb-0 pt-1"><?=$vars['errors']['date']?></p>
+                        <?php endif ?>
+                    </div>
+
+                    <!-- ALT -->
+                    <div class="form-group col-md-8 mb-4">
+                        <label>Alt</label>
+                        <div class="col-md-12 border-bottom p-0">
+                            <input type="text" name="alt" value="<?=$vars['alt']?>" class="form-control p-0 border-0">
+                        </div>
+                        <small class="text-secondary">Le <b>alt</b> sert à l'audio-description des images pour les non-voyants.</small>
+                        <?php if(!empty($vars['errors']) && isset($vars['errors']['alt'])):?>
+                            <p class="text-danger mb-0 pt-1"><?=$vars['errors']['alt']?></p>
+                        <?php endif ?>
+                    </div>
+                </div>
+
+                <div class="col-md-12 d-flex flex-wrap video-inputs">
+                    <!-- IS VIDEO -->
+                    <div class="form-group col-md-4 mb-4 d-flex flex-column">
+                        <label>Mettre une vidéo youtube ?</label>
+                        <div class="input-switch mt-3">
+                            <label for="is_video" style="font-weight: 400">Non</label>
+                            <input type="checkbox" id="is_video" name="is_video" class="input" <?php if($vars['is_video']) :?>checked<?php endif; ?>/>
+                            <label for="is_video" class="switch"></label>
+                            <label for="is_video" style="font-weight: 400">Oui</label>
+                        </div>
+                    </div>
+
+                    <!-- VIDEO URL -->
+                    <div class="form-group col-md-8 mb-4">
+                        <label>ID de la vidéo <span class="text-secondary small">(A renseigner si vidéo coché)</span></label>
+                        <div class="border-bottom p-0">
+                            <input type="text" name="video_url" value="<?=$vars['video_url']?>" class="form-control p-0 border-0">
+                        </div>
+                        <small class="text-secondary">Se trouve dans l'url (voir caractères en gras) : https://www.youtube.com/watch?v=<b>8RfKt5qxOuY</b></small>
+                        <?php if(!empty($vars['errors']) && isset($vars['errors']['video_url'])):?>
+                            <p class="text-danger mb-0 pt-1"><?=$vars['errors']['video_url']?></p>
+                        <?php endif ?>
+                    </div>
+                </div>
+
+                <div class="col-md-12 d-flex flex-wrap">
+                    <!-- TITLE -->
+                    <div class="form-group col-md-4 mb-4">
+                        <label>Titre <span class="text-secondary small">(Court de préférence)</span></label>
+                        <div class="col-md-12 border-bottom p-0">
+                            <input type="text" name="title" value="<?=$vars['title']?>" class="form-control p-0 border-0">
+                        </div>
+                        <small class="text-secondary">Le <b>titre</b> sera affiché sur la frise.</small>
+                        <?php if(!empty($vars['errors']) && isset($vars['errors']['title'])):?>
+                            <p class="text-danger mb-0 pt-1"><?=$vars['errors']['title']?></p>
+                        <?php endif ?>
+                    </div>
+
+                    <!-- SUBTITLE -->
+                    <div class="form-group col-md-8 mb-4">
+                        <label>Titre du paragraphe</label>
+                        <div class="col-md-12 border-bottom p-0">
+                            <input type="text" name="subtitle" value="<?=$vars['subtitle']?>" class="form-control p-0 border-0">
+                        </div>
+                        <small class="text-secondary">(A renseigné uniquement si différent du titre)</small>
+                        <?php if(!empty($vars['errors']) && isset($vars['errors']['subtitle'])):?>
+                            <p class="text-danger mb-0 pt-1"><?=$vars['errors']['subtitle']?></p>
+                        <?php endif ?>
+                    </div>
+                </div>
+
+                <!-- DESCRIPTION -->
+                <div class="form-group col-md-12 pb-4 mb-0 px-4">
+                    <label for="description" class="pb-2">Texte de présentation</label>
+                    <div class="col-md-12 border-bottom p-0">
+                        <textarea class="form-control" name ="description" id="description" rows="6" style="height: 300px;"><?=$vars['description']?></textarea>
+                    </div>
+                    <?php if(!empty($vars['errors']) && isset($vars['errors']['description'])):?>
+                        <p class="text-danger mb-0 pt-1"><?=$vars['errors']['description']?></p>
+                    <?php endif ?>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4 col-xlg-3 col-md-12"></div>
+    <div class="col-lg-8 col-xlg-9 col-md-12">
+        <button type="submit" class="btn btn-success text-white mt-3"><i class="fas fa-check pr-1"></i><?php echo $vars['id'] ? 'MODIFIER' : 'CREER' ?></button>
+    </div>
+    </div>
+</form>
+

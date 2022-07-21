@@ -1,0 +1,82 @@
+<a href="index.php?name=addPartner" class="btn btn-outline-blue mb-3"><i class="fas fa-plus pr-1"></i> Ajouter une photo de bannière</a>
+
+<?php if ($vars['partners']) :?>
+<form action ="" method="POST">
+    <div class="row ml-0 d-flex justify-content-xl-start justify-content-center mt-4">
+        <?php foreach($vars['partners'] as $partner): ?>
+
+            <div class="pr-4 position-relative">
+                <div class="position-absolute" style="z-index:1;">
+                    <a href="#" data-toggle="modal" data-target="#partner-<?=$partner['id']?>" class="btn btn-danger"><i class="fas fa-window-close"></i></a>
+                </div>
+                <div class="card card-list" style="width: 19em">
+                    <img src="../uploads/partner/<?=$partner['picture'] ?>" class="d-block w-100" style="height: 160px">
+                    <div class="card-body">
+                        <!-- TITRE -->
+                        <h3 class="card-title text-center"><?=$partner['title']?></h3>
+                        <!-- ORDRE AFFICHAGE -->
+                        <p class="mb-1 pt-2">Ordre d'affichage</p>
+                        <select class="custom-select text-center p-2 mb-4" id="display" name="position-<?=$partner['id'] ?>">
+                            <option value="null" selected>Choisir un chiffre</option>
+                            <?php for ($i = 1; $i <= count($vars['partners']); $i++) {
+                                $selected = $partner['position'] == $i ? 'selected' : '';
+                                echo "<option value='$i' $selected>$i</option>";
+                            } ?>
+                        </select>
+                        <!-- BOUTON MODIFIER -->
+                        <a href="index.php?name=addPartner&id=<?=$partner['id'] ?>" class="btn btn-primary"><i class="fas fa-edit pr-1"></i>MODIFIER</a>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal de suppression -->
+            <?php if($_SESSION['user']['role'] !== 'ROLE_ADMIN') :?>
+                <div class="modal fade" id="partner-<?=$partner['id']?>" tabindex="-1" aria-labelledby="supprimer" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title text-danger" id="exampleModalLabel">Désolé...</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                Vous n'avez <b>pas les droits</b> pour supprimer une photo de bannière.
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <?php else :?>
+                <div class="modal fade" id="partner-<?=$partner['id']?>" tabindex="-1" aria-labelledby="supprimer" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title text-danger" id="exampleModalLabel">Attention</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                Êtes-vous sûr de vouloir supprimer la photo <b><?=$partner['title']?></b>?
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                                <input type="hidden" name="title-<?=$partner['id']?>" value="<?=$partner['title']?>"/>
+                                <input type="hidden" name="picture-<?=$partner['id']?>" value="<?=$partner['picture']?>"/>
+                                <button type="submit" name="delete-partner-<?=$partner['id']?>" class="btn btn-danger" value="<?=$partner['id']?>">Supprimer</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <?php endif ;?>
+        <?php endforeach ?>
+    </div>
+    <?php if($vars['partners']) :?>
+        <button type="submit" class="btn btn-success text-white mt-3" name="order" value="order"><i class="fas fa-check pr-1"></i> Changer l'ordre</button>
+    <?php endif ;?>
+</form>
+<?php endif;?>

@@ -1,0 +1,73 @@
+<a href="index.php?name=users" class="btn btn-secondary mb-3 ml-3"><i class="fas fa-arrow-alt-circle-left pr-1"></i>Annuler</a>
+
+<form action="" id="file-upload-form" method="POST" enctype="multipart/form-data" class="form-horizontal form-material">
+
+    <div class="col-lg-8 col-xlg-9 col-md-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="form-group col-md-12 pb-4 mb-0">
+                    <label for="firstname">Prénom</label>
+                    <div class="col-md-6 border-bottom p-0">
+                        <input type="text" name="firstname" id="firstname" value="<?=$vars['firstname']?>" class="form-control pl-2 border-0"/>
+                    </div>
+                    <?php if($vars['errors'] && isset($vars['errors']['firstname'])):?>
+                        <p class="text-danger mb-0 pt-1"><?=$vars['errors']['firstname']?></p>
+                    <?php endif ?>
+                </div>
+
+                <div class="form-group col-md-12 pb-4 mb-0">
+                    <label for="lastname">Nom</label>
+                    <div class="col-md-6 border-bottom p-0">
+                        <input type="text" name="lastname" id="lastname" value="<?=$vars['lastname']?>" class="form-control pl-2 border-0"/>
+                    </div>
+                    <?php if($vars['errors'] && isset($vars['errors']['lastname'])):?>
+                        <p class="text-danger mb-0 pt-1"><?=$vars['errors']['lastname']?></p>
+                    <?php endif ?>
+                </div>
+
+                <div class="form-group col-md-12 pb-4 mb-0">
+                    <label for="email">Email</label>
+                    <div class="col-md-6 border-bottom p-0">
+                        <input type="text" name="email" id="email" value="<?=$vars['email']?>" class="form-control pl-2 border-0"/>
+                    </div>
+                    <?php if($vars['errors'] && isset($vars['errors']['email'])):?>
+                        <p class="text-danger mb-0 pt-1"><?=$vars['errors']['email']?></p>
+                    <?php endif ?>
+                </div>
+
+                <div class="form-group col-md-12 pb-4 mb-0">
+                    <label for="password">Mot de passe</label>
+                    <div class="col-md-6 border-bottom p-0">
+                        <input type="password" name="password" id="password" value="<?=$vars['password']?>" class="form-control pl-2 border-0"/>
+                    </div>
+                    <?php if($vars['errors'] && isset($vars['errors']['password'])):?>
+                        <p class="text-danger mb-0 pt-1"><?=$vars['errors']['password']?></p>
+                    <?php endif ?>
+                </div>
+
+                <div class="form-group col-md-12 pb-4 mb-0">
+                    <label for="confirmPassword">Confirmez le mot de passe</label>
+                    <div class="col-md-6 border-bottom p-0">
+                        <input type="password" name="confirmPassword" id="confirmPassword" value="<?=$vars['confirmPassword']?>" class="form-control pl-2 border-0"/>
+                    </div>
+                    <?php if($vars['errors'] && isset($vars['errors']['confirmPassword'])):?>
+                        <p class="text-danger mb-0 pt-1"><?=$vars['errors']['confirmPassword']?></p>
+                    <?php endif ?>
+                </div>
+
+                <div class="form-group col-md-6 pb-4 mb-0">
+                    <label for="role">Choix du rôle <span class="text-muted">(cliquez pour afficher le menu déroulant)</span></label>
+                    <select id="role" name="role" class="custom-select">
+                        <option value="ROLE_ADMIN" <?php if (array_key_exists('id',$_GET) && $vars['role'] == 'ROLE_ADMIN') :?> selected <?php endif;?>>Admin</option>
+                        <option value="ROLE_USER" <?php if (array_key_exists('id',$_GET) && $vars['role'] == 'ROLE_USER') :?> selected <?php endif;?>>Utilisateur</option>
+                    </select>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4 col-xlg-3 col-md-12"></div>
+    <div class="col-lg-8 col-xlg-9 col-md-12">
+        <button type="submit" class="btn btn-primary"><?php if (is_null($vars['id'])) : ?>AJOUTER<?php else : ?>MODIFIER<?php endif; ?></button>
+    </div>
+</form>

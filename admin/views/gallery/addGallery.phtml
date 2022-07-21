@@ -1,0 +1,87 @@
+
+<a href="index.php?name=gallery" class="btn btn-secondary mb-3"><i class="fas fa-arrow-alt-circle-left pr-1"></i>Annuler</a>
+
+<form method="POST" enctype="multipart/form-data" class="form-horizontal form-material">
+    <div id="drop-area" class="flex-wrap">
+
+        <!-- PHOTO -->
+        <div class="form-group col-md-12 no-gutters">
+
+            <label class="col-md-12 pl-0 h3 text-primary text-center mb-2 pr-0" for="picture">Photo</label>
+            <div class="parent-div d-flex justify-content-center position-relative">
+                <input type="file" name="picture" id="file-upload" class="pointer" data-max-files="1" style="position:absolute;top:0;left:0;opacity:0"/>
+                <span id="file-upload-btn" class="btn btn-primary"><i class="fa fa-download text-white pr-2" aria-hidden="true"></i>Drag or clic</span>
+            </div>
+            <div class="form-group col-md-12 py-2 mb-0">
+                <p class="text-secondary text-center">Taille max : <b>2 Mo</b></p>
+                <label for="file-upload" id="file-drag" class="d-flex justify-content-center">
+                    <!-- EDITION : si on a une photo on l'affiche et on passe le nom de cette photo dans un champ caché ! -->
+                    <?php if($vars['oldPicture'] !== null) :?>
+                        <input type="hidden" name="oldPicture" value="<?=$vars['oldPicture']?>">
+                        <img id="file-image" src="../uploads/gallery/<?=$vars['oldPicture']?>" class="hidden pt-2 d-block m-auto">
+                    <?php else:?>
+                        <img id="file-image" src="assets\img\download-icon.png" class="hidden pt-2 d-block m-auto">
+                    <?php endif;?>
+                    <div class="position-relative">
+                        <div id="start" style="left: 0; top: 0; opacity: 0; position: absolute;">
+                            <i class="fa fa-download" aria-hidden="true"></i>
+                            <div></div>
+                            <span id="file-upload-btn" class="btn btn-primary"></span>
+                            <div id="notimage" class="hidden"></div>
+                        </div>
+                        <div id="response" class="hidden" style="opacity:0;display:none">
+                            <div id="messages"></div>
+                            <progress class="progress" id="file-progress" value="0">
+                                <span>0</span>%
+                            </progress>
+                        </div>
+                </label>
+            </div>
+        </div>
+        <div class="parent-div d-flex justify-content-center flex-wrap">
+            <?php if(!empty($vars['errors']) && isset($vars['errors']['picture'])):?>
+                <p class="text-danger mb-0"><?=$vars['errors']['picture']?></p>
+            <?php endif ?>
+        </div>
+    </div>
+
+    <div class="d-flex col-md-12 no-gutters flex-wrap">
+        <!-- TITRE -->
+        <div class="form-group col-lg-6 pb-1 add-picture-input-title">
+            <label for="title">Titre</label>
+            <div class="border-bottom p-0">
+                <input type="text" name="title" value="<?=$vars['title']?>" class="form-control p-0 border-0">
+            </div>
+            <?php if(!empty($vars['errors']) && isset($vars['errors']['title'])):?>
+                <p class="text-danger mb-0 pt-1"><?=$vars['errors']['title']?></p>
+            <?php endif ?>
+        </div>
+
+        <!-- ALT -->
+        <div class="form-group col-lg-6 pb-1">
+            <label for="alt">Alt</label>
+            <div class="border-bottom p-0">
+                <input type="text" name="alt" id="alt" value="<?=$vars['alt']?>" class="form-control w-100 pl-2 border-0" placeholder="Photo d'un rameur"/>
+            </div>
+            <small class="text-secondary">Le <b>alt</b> sert à l'audio-description des images pour les non-voyants.</small>
+            <?php if(!empty($vars['errors']) && isset($vars['errors']['alt'])):?>
+                <p class="text-danger mb-0 pt-1"><?=$vars['errors']['alt']?></p>
+            <?php endif ?>
+        </div>
+    </div>
+
+    <div class="form-group col-md-4 pb-1 pr-4">
+        <label for="credit">Crédit <small>(Optionnel)</small></label>
+        <div class="border-bottom p-0">
+            <input type="text" name="credit" id="credit" value="<?=$vars['credit']?>" class="form-control pl-2 border-0"/>
+        </div>
+        <?php if(!empty($vars['errors']) && isset($vars['errors']['credit'])):?>
+            <p class="text-danger mb-0 pt-1"><?=$vars['errors']['credit']?></p>
+        <?php endif ?>
+    </div>
+
+    <!-- BOUTON ENVOYER / MODIFIER ? -->
+    <div class="form-group col-md-12">
+        <button type="submit" class="btn btn-primary mt-3"><?php if (is_null($vars['id'])) : ?>AJOUTER<?php else : ?>MODIFIER<?php endif; ?></button>
+    </div>
+</form>

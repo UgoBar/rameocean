@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <title>Rame Océan</title>
+    <link rel="shortcut icon" type="image/x-icon" href="front/img/favicon.ico">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Rame océan est une association qui propose et organise des traversées océanique à la rame pour toute personne motivée, de l'Atlantique et de la Méditerranée.">
+
+    <!-- Facebook Meta Tags -->
+    <meta property="og:url" content="https://www.rameocean.fr/">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Rame Océan">
+    <meta property="og:description" content="Rame océan est une association qui propose et organise des traversées océanique à la rame pour toute personne motivée, de l'Atlantique et de la Méditerranée.">
+    <meta property="og:image" content="https://www.rameocean.fr/uploads/rame-ocean-social-card.png">
+
+    <!-- Twitter Meta Tags -->
+    <meta property="twitter:url" content="https://www.rameocean.fr/">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Rame Océan">
+    <meta property="twitter:domain" content="rameocean.fr">
+    <meta name="twitter:description" content="Rame océan est une association qui propose et organise des traversées océanique à la rame pour toute personne motivée, de l'Atlantique et de la Méditerranée.">
+    <meta name="twitter:image" content="https://www.rameocean.fr/uploads/rame-ocean-social-card.png">
+
+    <!-- GOOGLE FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@100;400;600;700&family=Quicksand:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tw-elements/dist/css/index.min.css" />
+    <link rel="stylesheet" href="front/css/normalize.css" type="text/css">
+    <link rel="stylesheet" href="front/css/style.css" type="text/css">
+    <link rel="stylesheet" href="front/css/timeline.css" type="text/css">
+    <link rel="stylesheet" href="front/css/gallery.css" type="text/css">
+
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+                new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+            'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','GTM-NT5BWNJ');
+    </script>
+    <!-- End Google Tag Manager -->
+
+</head>
+
+<body>
+
+    <!-- Google Tag Manager (noscript) -->
+    <noscript>
+        <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NT5BWNJ" height="0" width="0" style="display:none;visibility:hidden"></iframe>
+    </noscript>
+    <!-- End Google Tag Manager (noscript) -->
+        <header id="desktopHeader">
+
+        <a href="#carouselExampleCaptions"><img src="front/img/logo_rame_ocean.png" alt="Logo de l'association Rame Océan"></a>
+        <nav>
+            <?php if($isIncoming):?>
+                <a href="#incoming">Prochaine traversée</a>
+            <?php endif ?>
+            <a href="#timeline">Traversées réalisées</a>
+            <a href="#partners">Partenaires</a>
+            <a href="#gallery">Images</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
+
+    <nav class="fixedHeader" style="pointer-events: none">
+        <?php if($isIncoming):?>
+            <a href="#incoming">Prochaine traversée</a>
+        <?php endif ?>
+        <a href="#timeline">Traversées réalisées</a>
+        <a href="#partners">Partenaires</a>
+        <a href="#gallery">Images</a>
+        <a href="#contact">Contact</a>
+
+        <div class="social-media">
+            <a href="https://www.facebook.com/rameocean" target="_blank"><i class="icon-facebook"></i></a>
+            <a href="https://twitter.com/FavrePatrick" target="_blank"><i class="icon-twitter"></i></a>
+            <a href="https://www.instagram.com/rameocean/" target="_blank"><i class="icon-insta"></i></a>
+        </div>
+    </nav>
+
+    <header id="mobileHeader">
+        <div class="waves-container">
+            <a href="#carouselExampleCaptions"><img src="front/img/logo_rame_ocean_without_baseline.png" alt="Logo de l'association Rame Océan"></a>
+            <nav>
+                <?php if($isIncoming):?>
+                    <a href="#incoming">Prochaine traversée</a>
+                <?php endif ?>
+                <a href="#timeline">Traversées réalisées</a>
+                <a href="#partners">Partenaires</a>
+                <a href="#gallery">Images</a>
+                <a href="#contact">Contact</a>
+                <div class="social-media">
+                    <a href="https://www.facebook.com/rameocean" target="_blank"><i class="icon-facebook"></i></a>
+                    <a href="https://twitter.com/FavrePatrick" target="_blank"><i class="icon-twitter"></i></a>
+                    <a href="https://www.instagram.com/rameocean/" target="_blank"><i class="icon-insta"></i></a>
+                </div>
+            </nav>
+            <canvas></canvas>
+        </div>
+    </header>
+
+    <div class="burger">
+        <div class="menu-wrapper">
+            <div class="line half start"></div>
+            <div class="line"></div>
+            <div class="line half end"></div>
+        </div>
+    </div>
+
+    <main>
+        <a href="#carouselExampleCaptions" class="arrow-up" style="pointer-events: none">
+            <img src="front/img/arrow_up.png" alt="icône pour remonter en haut de la page">
+        </a>
+
+        <div id="carouselExampleCaptions" class="carousel slide relative" data-bs-ride="carousel">
+            <div class="carousel-indicators absolute right-0 bottom-0 left-0 flex justify-center p-0 mb-4">
+                <?php for ($i = 0; $i < count($banners); $i++) {
+                    $active = $i === 0 ? 'active' : '' ;
+                    $current = $i === 0;
+                    $ariaLabel = $i + 1;
+                    echo "<button type='button' data-bs-target='#carouselExampleCaptions' data-bs-slide-to='$i' class='$active' aria-current='$current' aria-label='Slide $ariaLabel'></button>";
+                } ?>
+            </div>
+
+            <div class="carousel-inner relative w-full overflow-hidden">
+
+                <?php foreach($banners as $banner): ?>
+                    <figure class="carousel-item <?php echo $banner === $banners[0] ? 'active' : '' ?> relative float-left w-full">
+                        <img src="uploads/banner/<?=$banner['picture']?>" class="block w-full" alt="<?=$banner['alt']?>"/>
+                        <figcaption class="carousel-caption md:block absolute text-center">
+                            <h1 class="mb-0 pb-0"><?=$banner['title']?></h1>
+                        </figcaption>
+                    </figure>
+                <?php endforeach ?>
+            </div>
+
+            <!-- BUTTON PREV -->
+            <button class="carousel-control-prev absolute top-0 bottom-0 flex items-center justify-center p-0 text-center border-0 hover:outline-none hover:no-underline focus:outline-none focus:no-underline left-0"
+                    type="button"
+                    data-bs-target="#carouselExampleCaptions"
+                    data-bs-slide="prev">
+                <span class="carousel-control-prev-icon inline-block bg-no-repeat" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+
+            <!-- BUTTON NEXT -->
+            <button class="carousel-control-next absolute top-0 bottom-0 flex items-center justify-center p-0 text-center border-0 hover:outline-none hover:no-underline focus:outline-none focus:no-underline right-0"
+                    type="button"
+                    data-bs-target="#carouselExampleCaptions"
+                    data-bs-slide="next">
+                <span class="carousel-control-next-icon inline-block bg-no-repeat" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+
+        </div>
+
+        <!-- INFOS -->
+        <div id="infos" class="custom-container">
+            <h1 class="mt-6 text-center uppercase logo">Rame <span>océan</span></h1>
+            <section id="offers" class="mt-2 text-center">
+                <div class="offer">
+                    <img src="front/img/rames.png" alt="">
+                    <p>Vous prépare pour votre traversée à la rame (solo ou équipage)</p>
+                </div>
+                <div class="offer">
+                    <img src="front/img/prepare.png" alt="">
+                    <p>Recherche et prépare votre bateau</p>
+                </div>
+                <div class="offer">
+                    <img src="front/img/skipper.png" alt="">
+                    <p>Vous intègre dans un de nos équipages</p>
+                </div>
+                <div class="offer">
+                    <img src="front/img/equipage.png" alt="">
+                    <p>Vous prépare mentalement et physiquement</p>
+                </div>
+                <div class="offer">
+                    <img src="front/img/router.png" alt="">
+                    <p>Effectue votre routage</p>
+                </div>
+            </section>
+
+            <a href="#incoming" class="bevel-btn">Découvrez la prochaine traversée !</a>
+
+        </div>
+
+        <!-- PATRICK -->
+        <section id="patrick">
+            <div class="darkblue-overlay"></div>
+            <div class="custom-container">
+                <img src="uploads/profile/<?=$profile['picture']?>" alt="<?=$profile['alt']?>"/>
+                <div class="text-white pl-6">
+                    <h5 class="text-xl font-medium mb-2 font-bold"><?=$profile['title']?></h5>
+                    <div><?=$profile['description']?></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- INCOMING -->
+        <?php if($isIncoming):?>
+            <section id="incoming" class="custom-container">
+                <h1 class="text-marine uppercase font-bold text-center">Prochaine traversée</h1>
+                <div class="card">
+                    <section class="card-infos">
+                        <h2><?=$incoming['title']?></h2>
+                        <small><?=$incoming['start_at']?></small>
+                        <div class="pills">
+                            <p class="pill bg-orange"><span class="number"><?=$incoming['rower']?></span> rameur<?php echo $incoming['rower'] > 1 ? 's' : '' ?></p>
+                            <p class="pill bg-blue"><span class="number"><?=$incoming['seat_left']?></span> place<?php echo $incoming['seat_left'] > 1 ? 's' : '' ?> restante<?php echo $incoming['seat_left'] > 1 ? 's' : '' ?></p>
+                        </div>
+                        <?php if(!$incoming['seat_left']):?>
+                            <div class="complete">
+                                <p>Il n'y a plus de place pour cette traversée mais nous en organiserons d'autres.</p>
+                                <p>N'hésitez pas à nous contacter à l'aide du <a href="#contact">formulaire de contact</a> !</p>
+                            </div>
+                        <?php else :?>
+                            <div><?=$incoming['description']?></div>
+                        <?php endif ?>
+                    </section>
+                    <figure>
+                        <img src="front/img/rame-ocean-prochaine-traversee.png" alt="Photo d'un rameur">
+                    </figure>
+                </div>
+            </section>
+        <?php endif ?>
+
+
+        <!-- TIMELINE -->
+        <section id="timeline">
+
+            <h1 class="text-marine uppercase font-bold text-center">Traversées réalisées</h1>
+            <small>Cliquez sur une année pour plus d'infos !</small>
+
+            <div class="flex-parent">
+                <div class="dot-flex-container">
+                    <div class="dot active">
+                        <span data-year="2022" data-info="Canaries-Guadeloupe (2 rameurs)"></span>
+                    </div>
+                    <div class="dot">
+                        <span data-year="2021" data-info="MacFly et Carlito"></span>
+                    </div>
+                    <div class="dot">
+                        <span data-year="2019" data-info="Canaries-Antilles (5 rameurs)"></span>
+                    </div>
+                    <div class="dot">
+                        <span data-year="2019" data-info="Routage d’Emmanuel Coindre"></span>
+                    </div>
+                    <div class="dot">
+                        <span data-year="2017" data-info="Sénégal-Guyane"></span>
+                    </div>
+                    <div class="dot">
+                        <span data-year="2016" data-info="Canaries-Guadeloupe (6 rameurs)"></span>
+                    </div>
+                    <div class="dot">
+                        <span data-year="2014" data-info="Routage Atlantique + océan Indien"></span>
+                    </div>
+                    <div class="dot">
+                        <span data-year="2013" data-info="Maroc-Martinique (2 rameurs)"></span>
+                    </div>
+                    <div class="dot">
+                        <span data-year="2012" data-info="Canaries-Barbade (8 rameurs)"></span>
+                    </div>
+                    <div class="dot">
+                        <span data-year="2009" data-info="Sénégal-Guyane (solo)"></span>
+                    </div>
+                    <div class="dot">
+                        <span data-year="2006" data-info="Sénégal-Guyane (solo)"></span>
+                    </div>
+                    <div class="dot">
+                        <span data-year="2003" data-info="Route du Nouveau Monde"></span>
+                    </div>
+                    <div class="dot">
+                        <span data-year="2002" data-info="Route du Rhum (solo)"></span>
+                    </div>
+                    <div class="dot">
+                        <span data-year="2000" data-info="Transat Anglaise (solo)"></span>
+                    </div>
+                </div>
+
+                <div class="description-flex-container">
+
+                    <article class="active">
+                        <div class="media">
+                            <img src="front/img/traversees/2022 Canaries départ emplacement exact .jpg" alt="">
+                        </div>
+                        <div class="text">
+                            <h5>Canaries - Guadeloupe (2 rameurs)</h5>
+                            <p><b>RAME</b> OCEAN, avec Matt Dawson (USA) et Patrick Favre, repart en double sur une nouvelle traversée de l’Atlantique à la rame, sans assistance et sans remorquage au départ et à l’arrivée, des Canaries vers les Antilles. Ils arrivent 53 jours plus tard, avec un excellent bateau mais avec une météo capricieuse. Les conditions de navigation génèrent une mer croisée et une houle de Nord-Ouest particulièrement compliquée à gérer. Ils arrivent à lIlot Gosier au petit matin du 25 mars à 7h45 (heure de Pointe-à-Pitre). Le record de l’équipage Bahain/Favre de 2013 qui était l’objectif de la traversée n’est pas battu !</p>
+                            <p>Matt Dawson est un aventurier. Il vient d’accomplir avant la traversée à la rame l’ascension des « 7 summits », une traversée à pied du désert de Mojave (Californie) et une expédition au Pole Sud. Il ne pourra pas partir au Pôle Nord comme il l’avait prévu à l’arrivée en Guadeloupe à cause du conflit en Ukraine.</p>
+                        </div>
+                    </article>
+
+                    <article>
+                        <div class="text">
+                            <iframe width="560" height="315" src="https://www.youtube.com/embed/8RfKt5qxOuY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            <h5>Logistique pour McFly et Carlito</h5>
+                            <p><b>RAME</b> OCEAN organise la logistique des 2 célèbres youtubeurs MACFLY et CARLITO sur une traversée à la rame Continent - Corse. RAME OCEAN prépare les rameurs, leur bateau et effectue le routage. La traversée est réalisée en 65 heures 33 minutes et 55 secondes. Un véritable pari pour les 2 amis qui n’étaient pas du tout habitué à l’environnement marin. Apprentissage de la rame, de la navigation, prise en main du bateau et du matériel, suivi avec un catamaran à voile accompagnateur sur lequel les 2 rameurs se sont relayés dans les moments difficiles, un moral de vainqueur, voila les éléments clés de leur réussite.</p>
+                            <p>Un départ à Mandelieu la Napoule avec la foule des grands jours. Une arrivée magnifique en pleine nuit à Calvi sous les hourras d’un public digne du Vendée Globe. Incroyable traversée qui a été filmée de bout en bout avec les nombreuses caméras à bord du bateau à rame et du catamaran suiveur. Le résultat, ce sont 2 films de 46 minutes (« La préparation ») et de 1h50 (« La traversée ») visibles en ligne. Plus de 7 millions de vues pour chaque vidéo : c’est un record pour la rame océanique avec des images de rame océanique comme on en a jamais vu grâce à la maitrise des vidéos de l’équipe MACFLY et CARLITO avec la parrainage de REDBULL.</p>
+                            <p>Se préparer sur <a href="https://www.redbull.com/dz-fr/mcfly-carlito-traversee-coach-interview">sur ce lien</a> et sur <a href="https://www.redbull.com/dz-fr/mcfly-carlito-preparation-traversee">ce lien</a>.</p>
+                            <h6>La préparation :</h6>
+                            <iframe width="560" height="315" src="https://www.youtube.com/embed/4dorXexAo10" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+                    </article>
+
+                    <article>
+                        <div class="media">
+                            <img src="front/img/traversees/2019 Entrainement Canaries 2.jpg" alt="">
+                        </div>
+                        <div class="text">
+                            <h5>Canaries - Antilles (5 rameurs)</h5>
+                            <p>Nouveau départ de <b>RAME</b> OCEAN pour une traversée de l’atlantique à la rame avec un équipage de 5 rameurs sur le trajet classique Canaries - Antilles, sans assistance et sans remorquage au départ et à l'arrivée. 46 jours plus tard, le bateau arrive à l’Ilot Gosier, en Guadeloupe.</p>
+                        </div>
+                    </article>
+
+                    <article>
+                        <div class="text">
+                            <h5>Routage d’Emmanuel Coindre</h5>
+                            <p><b>RAME</b> OCEAN route Emmanuel Coindre sur une traversée de l’Atlantique à la rame sur le trajet Dakar (Sénégal) - Cayenne (Guyane) en 57 jours avec un départ à la toute fin de la période des alizés qui a généré un début de traversée très difficile pour s’éloigner des côtes africaines. Le rameur a été particulièrement tenace pour réussir à s’extirper d’une situation météorologique délicate.</p>
+                        </div>
+                    </article>
+
+                    <article>
+                        <div class="media">
+                            <img src="front/img/traversees/2017 Ramon (Espagne) 1 .jpg" alt="">
+                        </div>
+                        <div class="text">
+                            <h5>Logistique Sénégal - Guyane pour 4 rameurs</h5>
+                            <p><b>RAME</b> OCEAN et son équipe organisent la logistique de 4 bateaux qui traversent l’Atlantique en solitaire de Dakar (Sénégal) à Kourou (Guyane). Les 4 bateaux arrivent à Kourou sans assistance (pas de remorquage au départ mais remorquage à l’arrivée). Un des 4 skippers, trop au Nord de l’arrivée, se fait remorquer par un bateau à voile pour terminer son parcours.</p>
+                        </div>
+                    </article>
+
+                    <article>
+                        <div class="media">
+                            <img src="front/img/traversees/2016 Arrivée Guadeloupe.jpg" alt="">
+                        </div>
+                        <div class="text">
+                            <h5>Canaries - Guadeloupe (6 rameurs)</h5>
+                            <p><b>RAME</b> OCEAN repart en équipage de 6 sur la traversée de l’Atlantique à la rame sur le trajet Canaries - Antilles, sans assistance et sans remorquage au départ et à l'arrivée. La ligne d’arrivée est franchie en Guadeloupe 49 jours plus tard. La traversée a été variée et très intéressante (beaucoup de pluie et de grains pendant toute cette aventure). Les 2 femmes du bord sont parmi les 20 premières françaises à avoir réussi une traversée de l’Atlantique à la rame.</p>
+                        </div>
+                    </article>
+
+                    <article>
+                        <div class="text">
+                            <h5>Routage Atlantique + océan Indien</h5>
+                            <p><b>RAME</b> OCEAN effectue le routage des rameurs Philippe Malapert (océan atlantique : Dakar - Kourou en course, arrivé en 7ème position de l'épreuve) et Emmanuel Coindre (océan Indien : Australie - La Réunion en 56 jours 7 heures 29 minutes et 11 secondes, record du parcours).</p>
+                        </div>
+                    </article>
+
+                    <article>
+                        <div class="media">
+                            <img src="front/img/traversees/2013-Arrivée-Martinique-1.jpg" alt="">
+                        </div>
+                        <div class="text">
+                            <h5>Maroc-Martinique (2 rameurs)</h5>
+                            <p>L’équipage <b>RAME</b> OCEAN, avec Julien Bahain et Patrick Favre, se lance sur une traversée de l’Atlantique à la rame sur un parcours original, jamais réalisé jusqu'ici : de Tarfaya au Maroc jusqu’à La Trinité en Martinique, sans aucune assistance et sans remorquage au départ et à l'arrivée. Les 3197 milles sont avalés à la vitesse moyenne de 2,56 NM/h, meilleure performance d’un équipage français sur la traversée Est-Ouest de l’Atlantique à la rame.</p>
+                            <p>L’entente a été magnifique entre Julien Bahain, médaillé olympique en aviron à Pékin en 2008 et Patrick Favre, le marin.</p>
+                        </div>
+                    </article>
+
+                    <article>
+                        <div class="media">
+                            <img src="front/img/traversees/2012 TITAN PROJECT.jpg" alt="">
+                        </div>
+                        <div class="text">
+                            <h5>Canaries-Barbade (8 rameurs)</h5>
+                            <p>En 2012, la traversée de l’Atlantique à la rame est  réalisée avec un équipage de 8 personnes : 2 Français (Franck Festor et Patrick Favre), un Néo-zélandais, un Américain et 4 Anglais. Le bateau est skippé par le spécialiste anglais des traversées en équipage : Simon Chalk. A part la semaine du départ, humide et ventée, le reste de la traversée est particulièrement calme, ce qui ne favorise pas l’avancée du bateau. La traversée est néanmoins bouclée entre les Canaries et la Barbade en 34 jours, 4ème temps mondial, sans assistance et et sans remorquage au départ et à l’arrivée.</p>
+                        </div>
+                    </article>
+
+                    <article>
+                        <div class="media">
+                            <img src="front/img/traversees/2009 Vague en pleine mer.jpg" alt="">
+                        </div>
+                        <div class="text">
+                            <h5>Sénégal-Guyane (solo)</h5>
+                            <p>La 2ème édition de Rames Guyane, traversée de l’atlantique à la rame, a lieu entre Saint Louis du Sénégal et rejoint à nouveau Cayenne en Guyane. 46 jours pour Patrick Favre, 4ème sur 22 concurrents au départ.</p>
+                        </div>
+                    </article>
+
+                    <article>
+                        <div class="media">
+                            <img src="front/img/traversees/2006-Départ-Saint-Louis-du-Sénégal-vue-aérienne.jpg" alt="">
+                        </div>
+                        <div class="text">
+                            <h5>Sénégal-Guyane (solo)</h5>
+                            <p>1ère course à la rame pour Patrick Favre sur le trajet Saint Louis (Sénégal) - Cayenne (Guyane). Il termine 2ème de l’épreuve en 46 jours.</p>
+                            <p>15 rameurs se lancent sur la première Transat à la rame organisée pour des solos. Tout le monde dispose du même bateau, construit de façon semblable, en respectant un cahier des charges imposé. 5 rameurs sont à l’arrivée. Une traversée épique ! 6 Français seulement avaient traversé un océan à la rame avant cette course.</p>
+                        </div>
+                    </article>
+
+                    <article>
+                        <div class="text">
+                            <h5>La Route du Nouveau Monde</h5>
+                            <p>La Route du Nouveau Monde est une traversée à la voile d’ouest en Est organisée pour la première fois (ce sera la seule édition !). Le départ : Saint Domingue, en République dominicaine. L’arrivée : La Rochelle, en laissant Belle-Ile en Bretagne à Tribord. C’est une traversée difficile et froide réalisée en plein hiver (le départ a eu lieu le 31 janvier 2003). Il se court en équipage.</p>
+                            <p>Patrick Favre participe avec un équipage de 5 personnes sur le célèbre Cigare Rouge de VDH (Jean-Luc van Den Heede). Avant l’arrivée, les équipiers préfèrent stopper à La Trinité sur Mer devant le coup de vent qui s’annonce et Patrick Favre termine l’épreuve en solo ! Il se classe 4ème sur les 4 bateaux qui participent à l’épreuve.</p>
+                            <p>Pour en savoir plus <a href="https://www.letelegramme.fr/ar/viewarticle1024.php?aaaammjj=20030126&article=5602213&type=ar" target="_blank">cliquez ici</a></p>
+                        </div>
+                    </article>
+
+                    <article>
+                        <div class="media">
+                            <img src="front/img/traversees/2002 Départ Saint Malo.jpg" alt="">
+                        </div>
+                        <div class="text">
+                            <h5>Route du Rhum (solo)</h5>
+                            <p>La Route du Rhum est une course à la voile en solitaire entre la France métropolitaine (Saint-Malo) et la Guadeloupe (Pointe-à-Pitre). C’est aujourd’hui la course à la voile la plus connue des Français avec Le Vendée Globe. Tous les 4 ans, les skippers espèrent participer à cette course mythique qui a vu lors de la première édition en 1978 la première victoire d’un multicoque. Mike Birch termine 98 secondes devant Michel Malinovski dans une arrivée de légende !</p>
+                            <p>Patrick Favre termine 10ème de cette 7ème édition de la Route du Rhum (sur 18 skippers au départ dans la catégorie des monocoques 60 pieds Vendée Globe). Il a vécu la pire tempête de toutes les Route du Rhum. 80 noeuds relevés à la sortie de la Manche. 3 multicoques seulement terminent la course (sur 18 au départ). Record absolu d’abandons sur cette édition : 28 bateaux seulement sont à l’arrivée sur 58 au départ (48%).</p>
+                            <p>Pour en savoir plus <a href="https://www.routedurhum.com/fr" target="_blank">cliquez ici</a></p>
+                        </div>
+                    </article>
+
+                    <article>
+                        <div class="media">
+                            <img src="front/img/traversees/2000_preparation_a_Caen_1.jpg" alt="">
+                        </div>
+                        <div class="text">
+                            <h5>Transat anglaise (solo)</h5>
+                            <p>La Transat anglaise 2000 est une course à la voile en solitaire entre l’Angleterre (Plymouth) et les USA (Newport). Eric Tabarly se fait connaitre avec cette course en la remportant en 1964 et en 1976.</p>
+                            <p>Pendant cette course, les skippers rencontrent dès la sortie de la manche et pendant toute la traversée de très fortes dépressions et cela génère beaucoup d’abandons.</p>
+                            <p>Patrick Favre termine 13ème de la catégorie des monocoques 60 pieds Vendée Globe (13 skippers terminent sur 18 au départ) malgré une quille cassée et un démâtage partiel (6m de mât cassé à une semaine de l’arrivée).</p>
+                            <p>Pour en savoir plus <a href="https://fr.wikipedia.org/wiki/Transat_anglaise_2000" target="_blank">cliquez ici</a></p>
+                        </div>
+                    </article>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- PARTENAIRE -->
+        <section id="partners">
+            <h1 class="text-white uppercase font-bold text-center">Partenaires</h1>
+            <div class="custom-container">
+                <figure>
+                    <figcaption>Marina Bas du fort</figcaption>
+                    <img src="front/img/partenaires/marina.jpg" alt="">
+                </figure>
+                <figure class="hydro">
+                    <figcaption>Compagnie Hydrotechnique</figcaption>
+                    <img src="front/img/partenaires/compagnie_hydro.jpg" alt="">
+                </figure>
+                <figure>
+                    <figcaption>Incept sport</figcaption>
+                    <img src="front/img/partenaires/incept_sport.png" alt="">
+                </figure>
+                <figure class="long-cours">
+                    <figcaption>Long Cours</figcaption>
+                    <img src="front/img/partenaires/long_cours.png" alt="">
+                </figure>
+                <figure>
+                    <figcaption>ESCP</figcaption>
+                    <img src="front/img/partenaires/escp.png" alt="">
+                </figure>
+                <figure>
+                    <figcaption>SNBS</figcaption>
+                    <img src="front/img/partenaires/snbs.png" alt="">
+                </figure>
+                <figure>
+                    <figcaption>SNO</figcaption>
+                    <img src="front/img/partenaires/sno.gif" alt="">
+                </figure>
+                <figure>
+                    <figcaption>Cardiac des Monts</figcaption>
+                    <img src="front/img/partenaires/cardiac.jpg" alt="">
+                </figure>
+                <figure>
+                    <figcaption>Le Rire Médecin</figcaption>
+                    <img src="front/img/partenaires/rire_medecin.png" alt="">
+                </figure>
+            </div>
+        </section>
+
+        <!-- GALLERY -->
+        <section id="gallery">
+
+            <h1 class="text-marine uppercase font-bold text-center">Galerie photo</h1>
+
+            <div id="image-gallery" class="grid grid-cols-8 md-grid-cols-3 gap-4">
+                <div class="image">
+                    <figure class="img-wrapper">
+                        <img src="front/img/gallery/2006-En-course-1.jpg" class="img-responsive">
+                        <figcaption class="img-overlay">
+                            <h3 class="fw-bold text-uppercase mb-3" data-title="En course" data-credit="">En course</h3>
+                            <i class="icon-zoomin" aria-hidden="true"></i>
+                        </figcaption>
+                    </figure>
+                </div>
+                <div class="image">
+                    <figure class="img-wrapper">
+                        <img src="front/img/gallery/2006-En-course-2.jpg" class="img-responsive">
+                        <figcaption class="img-overlay">
+                            <h3 class="fw-bold text-uppercase mb-3" data-title="En course" data-credit="">En course</h3>
+                            <i class="icon-zoomin" aria-hidden="true"></i>
+                        </figcaption>
+                    </figure>
+                </div>
+                <div class="image">
+                    <figure class="img-wrapper">
+                        <img src="front/img/gallery/2022-Marquage-bateau-poupe.jpg" class="img-responsive">
+                        <figcaption class="img-overlay">
+                            <h3 class="fw-bold text-uppercase mb-3" data-title="Marquage bateau poupe" data-credit="">Marquage bateau poupe</h3>
+                            <i class="icon-zoomin" aria-hidden="true"></i>
+                        </figcaption>
+                    </figure>
+                </div>
+                <div class="image">
+                    <figure class="img-wrapper">
+                        <img src="front/img/gallery/2012-TITAN-Depart-Canaries-entrainement.jpg" class="img-responsive">
+                        <figcaption class="img-overlay">
+                            <h3 class="fw-bold text-uppercase mb-3" data-title="2012 TITAN Départ Canaries entrainement" data-credit="">2012 TITAN Départ Canaries entrainement</h3>
+                            <i class="icon-zoomin" aria-hidden="true"></i>
+                        </figcaption>
+                    </figure>
+                </div>
+                <div class="image">
+                    <figure class="img-wrapper">
+                        <img src="front/img/gallery/2000-Preparation-a-Caen-2.jpg" class="img-responsive">
+                        <figcaption class="img-overlay">
+                            <h3 class="fw-bold text-uppercase mb-3" data-title="2000 Préparation à Caen" data-credit="">2000 Préparation à Caen</h3>
+                            <i class="icon-zoomin" aria-hidden="true"></i>
+                        </figcaption>
+                    </figure>
+                </div>
+                <div class="image">
+                    <figure class="img-wrapper">
+                        <img src="front/img/gallery/2012-TITAN-Barbade-jour-d-arrivee.jpg" class="img-responsive">
+                        <figcaption class="img-overlay">
+                            <h3 class="fw-bold text-uppercase mb-3" data-title="2012 TITAN Barbade jour d'arrivée" data-credit="">2012 TITAN Barbade jour d'arrivée</h3>
+                            <i class="icon-zoomin" aria-hidden="true"></i>
+                        </figcaption>
+                    </figure>
+                </div>
+                <div class="image">
+                    <figure class="img-wrapper">
+                        <img src="front/img/gallery/2019-Guadeloupe-jour-d-arrivee.jpg" class="img-responsive">
+                        <figcaption class="img-overlay">
+                            <h3 class="fw-bold text-uppercase mb-3" data-title="2019 Guadeloupe jour d'arrivée" data-credit="">2019 Guadeloupe jour d'arrivée</h3>
+                            <i class="icon-zoomin" aria-hidden="true"></i>
+                        </figcaption>
+                    </figure>
+                </div>
+                <div class="image">
+                    <figure class="img-wrapper">
+                        <img src="front/img/gallery/2006-Arrivee-Parade-Vergé-Favre.jpg" class="img-responsive">
+                        <figcaption class="img-overlay">
+                            <h3 class="fw-bold text-uppercase mb-3" data-title="2006 Arrivée Parade Vergé Favre.jpg" data-credit="">2006 Arrivée Parade Vergé Favre.jpg</h3>
+                            <i class="icon-zoomin" aria-hidden="true"></i>
+                        </figcaption>
+                    </figure>
+                </div>
+
+                <!-- New line -->
+                <div class="image">
+                    <figure class="img-wrapper">
+                        <img src="front/img/gallery/2016-arrivee-Guadeloupe-Equipage.jpg" class="img-responsive">
+                        <figcaption class="img-overlay">
+                            <h3 class="fw-bold text-uppercase mb-3" data-title="2016 arrivée Guadeloupe Equipage" data-credit="">2016 arrivée Guadeloupe Equipage</h3>
+                            <i class="icon-zoomin" aria-hidden="true"></i>
+                        </figcaption>
+                    </figure>
+                </div>
+                <div class="image">
+                    <figure class="img-wrapper">
+                        <img src="front/img/gallery/2016-Preparation-Lucie-catamaran.jpg" class="img-responsive">
+                        <figcaption class="img-overlay">
+                            <h3 class="fw-bold text-uppercase mb-3" data-title="2016 Préparation Lucie catamaran" data-credit="">2016 Préparation Lucie catamaran</h3>
+                            <i class="icon-zoomin" aria-hidden="true"></i>
+                        </figcaption>
+                    </figure>
+                </div>
+                <div class="image">
+                    <figure class="img-wrapper">
+                        <img src="front/img/gallery/2006-Arrivée-Podium.jpg" class="img-responsive">
+                        <figcaption class="img-overlay">
+                            <h3 class="fw-bold text-uppercase mb-3" data-title="2006 Arrivée Podium" data-credit="">2006 Arrivée Podium</h3>
+                            <i class="icon-zoomin" aria-hidden="true"></i>
+                        </figcaption>
+                    </figure>
+                </div>
+                <div class="image">
+                    <figure class="img-wrapper">
+                        <img src="front/img/gallery/2012-TITAN-Arrivee-Barbade-Rangement.jpg" class="img-responsive">
+                        <figcaption class="img-overlay">
+                            <h3 class="fw-bold text-uppercase mb-3" data-title="2012 TITAN Arrivée Barbade Rangement" data-credit="">2012 TITAN Arrivée Barbade Rangement</h3>
+                            <i class="icon-zoomin" aria-hidden="true"></i>
+                        </figcaption>
+                    </figure>
+                </div>
+                <div class="image">
+                    <figure class="img-wrapper">
+                        <img src="front/img/gallery/2019-Noel-en-mer-1.jpg" class="img-responsive">
+                        <figcaption class="img-overlay">
+                            <h3 class="fw-bold text-uppercase mb-3" data-title="2019 Noel en mer 1" data-credit="">2019 Noel en mer 1</h3>
+                            <i class="icon-zoomin" aria-hidden="true"></i>
+                        </figcaption>
+                    </figure>
+                </div>
+                <div class="image">
+                    <figure class="img-wrapper">
+                        <img src="front/img/gallery/2006-Arrivee-Fumigene.jpg" class="img-responsive">
+                        <figcaption class="img-overlay">
+                            <h3 class="fw-bold text-uppercase mb-3" data-title="2006 Arrivée Fumigène" data-credit="">2006 Arrivée Fumigène</h3>
+                            <i class="icon-zoomin" aria-hidden="true"></i>
+                        </figcaption>
+                    </figure>
+                </div>
+                <div class="image">
+                    <figure class="img-wrapper">
+                        <img src="front/img/gallery/2019-En-mer-veste-de-quart.jpg" class="img-responsive">
+                        <figcaption class="img-overlay">
+                            <h3 class="fw-bold text-uppercase mb-3" data-title="2019 En mer veste de quart" data-credit="">2019 En mer veste de quart</h3>
+                            <i class="icon-zoomin" aria-hidden="true"></i>
+                        </figcaption>
+                    </figure>
+                </div>
+                <div class="image">
+                    <figure class="img-wrapper">
+                        <img src="front/img/gallery/2013-Preparation-Bahain-Favre-Maroc-2.jpg" class="img-responsive">
+                        <figcaption class="img-overlay">
+                            <h3 class="fw-bold text-uppercase mb-3" data-title="2013 Préparation Bahain Favre Maroc 2" data-credit="">2013 Préparation Bahain Favre Maroc 2</h3>
+                            <i class="icon-zoomin" aria-hidden="true"></i>
+                        </figcaption>
+                    </figure>
+                </div>
+
+                <!-- New line -->
+                <div class="image">
+                    <figure class="img-wrapper">
+                        <img src="front/img/gallery/2006-Arrivée-Cayenne-Tardiveau-Favre.jpg" class="img-responsive">
+                        <figcaption class="img-overlay">
+                            <h3 class="fw-bold text-uppercase mb-3" data-title="2006 Arrivée Cayenne Tardiveau Favre" data-credit="">2006 Arrivée Cayenne Tardiveau Favre</h3>
+                            <i class="icon-zoomin" aria-hidden="true"></i>
+                        </figcaption>
+                    </figure>
+                </div>
+                <div class="image">
+                    <figure class="img-wrapper">
+                        <img src="front/img/gallery/2013-Arrivee-Martnique-Bahain.jpg" class="img-responsive">
+                        <figcaption class="img-overlay">
+                            <h3 class="fw-bold text-uppercase mb-3" data-title="2013 Arrivée Martnique Bahain" data-credit="">2013 Arrivée Martnique Bahain</h3>
+                            <i class="icon-zoomin" aria-hidden="true"></i>
+                        </figcaption>
+                    </figure>
+                </div>
+                <div class="image">
+                    <figure class="img-wrapper">
+                        <img src="front/img/gallery/2013-Arrivee-Martinique-5.jpg" class="img-responsive">
+                        <figcaption class="img-overlay">
+                            <h3 class="fw-bold text-uppercase mb-3" data-title="2013 Arrivée Martinique" data-credit="">2013 Arrivée Martinique</h3>
+                            <i class="icon-zoomin" aria-hidden="true"></i>
+                        </figcaption>
+                    </figure>
+                </div>
+                <div class="image">
+                    <figure class="img-wrapper">
+                        <img src="front/img/gallery/2016-Preparation-Saint-Ouen-L'Aumone-SNO.jpg" class="img-responsive">
+                        <figcaption class="img-overlay">
+                            <h3 class="fw-bold text-uppercase mb-3" data-title="2016 Préparation Saint Ouen L'Aumone SNO" data-credit="">2016 Préparation Saint Ouen L'Aumone SNO</h3>
+                            <i class="icon-zoomin" aria-hidden="true"></i>
+                        </figcaption>
+                    </figure>
+                </div>
+                <div class="image">
+                    <figure class="img-wrapper">
+                        <img src="front/img/gallery/2013-Arrivee-Martinique-2.jpg" class="img-responsive">
+                        <figcaption class="img-overlay">
+                            <h3 class="fw-bold text-uppercase mb-3" data-title="2013 Arrivée Martinique 2" data-credit="">2013 Arrivée Martinique 2</h3>
+                            <i class="icon-zoomin" aria-hidden="true"></i>
+                        </figcaption>
+                    </figure>
+                </div>
+                <div class="image">
+                    <figure class="img-wrapper">
+                        <img src="front/img/gallery/2022-Arrivee-Ponton-Pointe-a-Pitre.jpg" class="img-responsive">
+                        <figcaption class="img-overlay">
+                            <h3 class="fw-bold text-uppercase mb-3" data-title="2022 Arrivée Ponton Pointe à Pitre" data-credit="">2022 Arrivée Ponton Pointe à Pitre</h3>
+                            <i class="icon-zoomin" aria-hidden="true"></i>
+                        </figcaption>
+                    </figure>
+                </div>
+                <div class="image">
+                    <figure class="img-wrapper">
+                        <img src="front/img/gallery/2013-Equipage-Bahain-Favre.jpg" class="img-responsive">
+                        <figcaption class="img-overlay">
+                            <h3 class="fw-bold text-uppercase mb-3" data-title="2013 Equipage Bahain Favre" data-credit="">2013 Equipage Bahain Favre</h3>
+                            <i class="icon-zoomin" aria-hidden="true"></i>
+                        </figcaption>
+                    </figure>
+                </div>
+                <div class="image">
+                    <figure class="img-wrapper">
+                        <img src="front/img/gallery/2006-Depart-vue-aerienne.jpg" class="img-responsive">
+                        <figcaption class="img-overlay">
+                            <h3 class="fw-bold text-uppercase mb-3" data-title="2006 Départ vue aérienne" data-credit="">2006 Départ vue aérienne</h3>
+                            <i class="icon-zoomin" aria-hidden="true"></i>
+                        </figcaption>
+                    </figure>
+                </div>
+            </div><!-- End image gallery -->
+        </section>
+
+        <section id="contact">
+            <div class="darkblue-overlay"></div>
+            <div class="form-container">
+                <h1 class="text-white uppercase font-bold text-center">Contact</h1>
+                <form method="post">
+
+                    <div class="form-group w-33 sm-w-100">
+                        <label for="firstname">Prénom</label>
+                        <input type="text" id="firstname" name="firstname"
+                               class="rounded-none rounded-lg bg-gray-50 border border-gray-300 text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                               placeholder="Jacques-Yves">
+                    </div>
+
+                    <div class="form-group w-33 sm-w-100">
+                        <label for="lastname">Nom</label>
+                        <input type="text" id="lastname" name="lastname"
+                               class="rounded-none rounded-lg bg-gray-50 border border-gray-300 text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                               placeholder="Cousteau">
+                    </div>
+
+                    <div class="form-group w-33 sm-w-100 phone">
+                        <label for="phone">Téléphone</label>
+                        <div class="flex">
+                            <input type="tel" id="phone" name="phone" onchange="removeError(document.querySelector('.phone .flex'))"
+                                   class="rounded-none rounded-lg bg-gray-50 border border-gray-300 text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                   placeholder="06 00 00 00 00">
+                        </div>
+                    </div>
+
+                    <div class="form-group w-50 sm-w-100">
+                        <label for="email" class="">Mail</label>
+                        <input type="email" id="email" name="email"
+                               class="rounded-none rounded-lg bg-gray-50 border border-gray-300 text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                               placeholder="mrcousteau@mail.com">
+                    </div>
+
+                    <div class="form-group w-50 sm-w-100">
+                        <label for="demand">Votre demande</label>
+                        <select id="demand" name="demand" onchange="removeError(this)"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            <option value="1">Sélectionnez un choix</option>
+                            <option value="traversee solo">Réaliser une traversée en solo</option>
+                            <option value="traversee equipage">Réaliser une traversée en équipage</option>
+                            <option value="logistique">Demande de logistique</option>
+                            <option value="routage">Demande de routage</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group w-100">
+                        <label for="content">Votre message</label>
+                        <textarea id="content" name="content" rows="4" onchange="removeError(this)"
+                                  class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Formulez votre demande"></textarea>
+                    </div>
+
+                    <button class="btn">Envoyer</button>
+
+                </form>
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- JS TAILWIND -->
+    <script src="https://cdn.jsdelivr.net/npm/tw-elements/dist/js/index.min.js"></script>
+    <!-- jQUERY -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- Custom JS -->
+    <script src="front/js/script.js"></script>
+    <script src="front/js/movingWaves.js"></script>
+    <script src="front/js/gallery.js"></script>
+</body>
+
+</html>
