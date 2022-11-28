@@ -17,7 +17,6 @@ class RowerController extends DefaultController
     {
         $rowers = $this -> rower -> findAll();
 
-
         foreach ($rowers as $rower) {
             if (isset($_POST['delete-rower-' . $rower['id']])) {
                 $id      = (int)$_POST['delete-rower-' . $rower['id']];
@@ -36,7 +35,6 @@ class RowerController extends DefaultController
 
     public function addRower()
     {
-        $this -> verifyConnection('ROLE_ROWER');
 
         $pageTitle = 'Ajouter un rameur';
         $id = array_key_exists('id',$_GET) ? (int)$_GET['id'] : null;

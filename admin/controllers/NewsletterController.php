@@ -14,7 +14,6 @@ class NewsletterController extends DefaultController
     public function getNews()
     {
         $newsletters = $this -> newsletter -> findAll();
-        setlocale(LC_TIME, "fr_FR");
 
         foreach ($newsletters as $newsletter) {
             if (isset($_POST['delete-newsletter-' . $newsletter['id']])) {
@@ -31,8 +30,6 @@ class NewsletterController extends DefaultController
 
     public function addNews()
     {
-
-        $this -> verifyConnection('ROLE_ROWER');
 
         $pageTitle = 'Ajouter une news';
         $id = array_key_exists('id',$_GET) ? (int)$_GET['id'] : null;
