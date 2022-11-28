@@ -1,0 +1,119 @@
+
+<form action="" id="file-upload-form" method="POST" enctype="multipart/form-data" class="form-horizontal form-material">
+    <div class="row">
+        <div class="col-lg-4 col-xlg-3 col-md-12">
+            <label class="col-md-12 pl-0 h3 text-primary text-center mb-2 pr-0" for="picture">Photo</label>
+            <div class="parent-div d-flex justify-content-center position-relative">
+                <input type="file" name="picture" id="file-upload" class="pointer" data-max-files="1" style="position:absolute;top:0;left:0;opacity:0"/>
+                <span id="file-upload-btn" class="btn btn-primary"><i class="fa fa-download text-white pr-2" aria-hidden="true"></i>Drag or clic</span>
+            </div>
+            <div class="form-group col-md-12 py-2 mb-0">
+                <label for="file-upload" id="file-drag" class="d-flex justify-content-center">
+                    <!-- EDITION : si on a une photo on l'affiche et on passe le nom de cette photo dans un champ caché ! -->
+                    <?php if($vars['oldPicture'] !== null) :?>
+                        <input type="hidden" name="oldPicture" value="<?=$vars['oldPicture']?>">
+                        <img id="file-image" src="../uploads/rower/<?=$vars['oldPicture']?>" class="hidden pt-2 d-block m-auto">
+                    <?php else:?>
+                        <img id="file-image" src="assets\img\download-icon.png" class="hidden pt-2 d-block m-auto">
+                    <?php endif;?>
+                    <div class="position-relative">
+                        <div id="start" style="left: 0; top: 0; opacity: 0; position: absolute;">
+                            <i class="fa fa-download" aria-hidden="true"></i>
+                            <div></div>
+                            <span id="file-upload-btn" class="btn btn-primary"></span>
+                            <div id="notimage" class="hidden"></div>
+                        </div>
+                        <div id="response" class="hidden" style="opacity:0;display:none">
+                            <div id="messages"></div>
+                            <progress class="progress" id="file-progress" value="0">
+                                <span>0</span>%
+                            </progress>
+                        </div>
+                </label>
+            </div>
+        </div>
+        <div class="parent-div d-flex justify-content-center flex-wrap">
+            <p class="form-text text-center">Pour modifier une image téléchargez en une nouvelle. Sinon l'ancienne sera conservée !</p>
+            <p class="text-secondary text-center">Taille max : <b>2 Mo</b></p>
+            <?php if(!empty($vars['errors']) && isset($vars['errors']['picture'])):?>
+                <p class="text-danger mb-0"><?=$vars['errors']['picture']?></p>
+            <?php endif ?>
+        </div>
+    </div>
+
+    <div class="col-lg-8 col-xlg-9 col-md-12">
+        <div class="card">
+            <div class="card-body">
+
+                <!-- ALT -->
+                <div class="form-group col-md-6 mb-4">
+                    <label>Alt</label>
+                    <div class="col-md-12 border-bottom p-0">
+                        <input type="text" name="alt" value="<?=$vars['alt']?>" class="form-control p-0 border-0">
+                    </div>
+                    <small class="text-secondary">Le <b>alt</b> sert à l'audio-description des images pour les non-voyants.</small>
+                    <?php if(!empty($vars['errors']) && isset($vars['errors']['alt'])):?>
+                        <p class="text-danger mb-0 pt-1"><?=$vars['errors']['alt']?></p>
+                    <?php endif ?>
+                </div>
+
+                <div class="row" style="padding-left: 15px; padding-right: 15px">
+                    <!-- FIRSTNAME -->
+                    <div class="form-group col-12 col-md-6 mb-4">
+                        <label>Prénom</label>
+                        <div class="col-md-12 border-bottom p-0">
+                            <input type="text" name="firstname" value="<?=$vars['firstname']?>" class="form-control p-0 border-0">
+                        </div>
+                        <?php if(!empty($vars['errors']) && isset($vars['errors']['firstname'])):?>
+                            <p class="text-danger mb-0 pt-1"><?=$vars['errors']['firstname']?></p>
+                        <?php endif ?>
+                    </div>
+
+                    <!-- LASTNAME -->
+                    <div class="form-group col-12 col-md-6 mb-4">
+                        <label>Nom de famille</label>
+                        <div class="col-md-12 border-bottom p-0">
+                            <input type="text" name="lastname" value="<?=$vars['lastname']?>" class="form-control p-0 border-0">
+                        </div>
+                        <?php if(!empty($vars['errors']) && isset($vars['errors']['lastname'])):?>
+                            <p class="text-danger mb-0 pt-1"><?=$vars['errors']['lastname']?></p>
+                        <?php endif ?>
+                    </div>
+                </div>
+
+                <div class="row" style="padding-left: 15px; padding-right: 15px">
+                    <!-- AGE -->
+                    <div class="form-group col-12 col-md-6 mb-4">
+                        <label>Age</label>
+                        <div class="col-md-12 border-bottom p-0">
+                            <input type="number" name="age" value="<?=$vars['age']?>" class="form-control p-0 border-0">
+                        </div>
+                    </div>
+
+                    <!-- JOB -->
+                    <div class="form-group col-12 col-md-6 mb-4">
+                        <label>Job</label>
+                        <div class="col-md-12 border-bottom p-0">
+                            <input type="text" name="job" value="<?=$vars['job']?>" class="form-control p-0 border-0">
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- DESCRIPTION -->
+                <div class="form-group col-md-12 pb-4 mb-0">
+                    <label for="description">Texte de présentation</label>
+                    <div class="col-md-12 border-bottom p-0">
+                        <textarea class="form-control" name ="description" id="description" rows="6" style="height: 300px;"><?=$vars['description']?></textarea>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4 col-xlg-3 col-md-12"></div>
+    <div class="col-lg-8 col-xlg-9 col-md-12">
+        <button type="submit" class="btn btn-success text-white mt-3"><i class="fas fa-check pr-1"></i><?php echo $vars['id'] ? 'MODIFIER' : 'CREER' ?></button>
+    </div>
+</form>

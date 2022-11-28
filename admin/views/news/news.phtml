@@ -1,0 +1,69 @@
+<a href="index.php?name=addNews" class="btn btn-outline-blue mb-3"><i class="fas fa-plus pr-1"></i> Ajouter une news</a>
+
+<?php if ($vars['newsletters']) :?>
+    <form action ="" method="POST">
+        <div class="row ml-0 d-flex justify-content-xl-start justify-content-center mt-4">
+            <?php foreach($vars['newsletters'] as $newsletter): ?>
+
+                <div class="pr-4 position-relative col-12 mb-2">
+                    <div class="row bg-white p-3 align-items-center">
+                        <div class="col-1 text-center">
+                            <div class="flex justify-content-between">
+                                <a href="#" data-toggle="modal" data-target="#rower-<?=$newsletter['id']?>" class="btn btn-danger"><i class="fas fa-window-close"></i></a>
+                                <a href="index.php?name=addNews&id=<?=$newsletter['id'] ?>" class="btn btn-primary"><i class="fas fa-edit"></i></a>
+                            </div>
+                        </div>
+                        <div class="col-11">
+                            <h4 class="date"><?= strftime("%A %d %B %G", strtotime($newsletter['date'])) ?></h4>
+                            <?=$newsletter['description']?>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Modal de suppression -->
+                <?php if($_SESSION['user']['role'] !== 'ROLE_ADMIN' && $_SESSION['user']['role'] !== 'ROLE_ROWER') :?>
+                    <div class="modal fade" id="rower-<?=$newsletter['id']?>" tabindex="-1" aria-labelledby="supprimer" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title text-danger" id="exampleModalLabel">Désolé...</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    Vous n'avez <b>pas les droits</b> pour supprimer une news.
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <?php else :?>
+                    <div class="modal fade" id="rower-<?=$newsletter['id']?>" tabindex="-1" aria-labelledby="supprimer" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title text-danger" id="exampleModalLabel">Attention</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    Êtes-vous sûr de vouloir supprimer la news du <b><?=$newsletter['date']?></b>?
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                                    <button type="submit" name="delete-newsletter-<?=$newsletter['id']?>" class="btn btn-danger" value="<?=$newsletter['id']?>">Supprimer</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <?php endif ;?>
+            <?php endforeach ?>
+        </div>
+    </form>
+<?php else:?>
+    <p>Aucun rameur pour le moment.</p>
+<?php endif;?>

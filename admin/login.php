@@ -3,7 +3,7 @@
 declare(strict_types=1);
 session_start();
 
-require('../config/bdd.php');
+require('../lib/bdd.php');
 require('../models/User.php');
 
 $email               = '';
@@ -27,7 +27,6 @@ if(isset($_POST['connexion']))
         $error = true;
 
     $password = $_POST['password'];
-
 
     /* Récupération de l'utilisateur */
     $userModel = new User();
@@ -71,13 +70,13 @@ if(isset($_POST['updatePassword']))
         // Envoie de l'email avec un token dans le lien cliquable
         $subject = "Reinitialisation du mot de passe";
         $msg = '<html><body>';
-        $msg .= "Pour réinitialiser ton mot de passe cliques sur ce lien : https://www.nic-l-elec.fr/admin/updatePassword.php?token=$token";
+        $msg .= "Pour réinitialiser ton mot de passe cliques sur ce lien : https://www.rameocean.fr/admin/updatePassword.php?token=$token";
         $msg .= '</body></html>';
         $msg = wordwrap($msg,70);
 
         $headers  = 'MIME-Version: 1.0' . "\r\n";
         $headers .= 'Content-type: text/html; charset=UTF-8' . "\r\n";
-        $headers .= 'From: Nic.L Elec <postmaster@nic-l-elec.fr>'."\r\n";
+        $headers .= 'From: Rame Océan <contact@rameocean.fr>'."\r\n";
         $headers .= 'X-Mailer: PHP/' . phpversion();
 
         // Si il n'y a pas d'erreurs alors on envoi le mail et on affiche la confirmation

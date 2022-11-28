@@ -56,8 +56,8 @@ class Profile
         $mediaId = $this->findMediaId($profileId);
 
         $stm = $this->dbh->prepare("
-            DELETE FROM ro_profile WHERE profile.id = :profileId;
-            DELETE FROM ro_media where media.id = :mediaId
+            DELETE FROM ro_profile WHERE ro_profile.id = :profileId;
+            DELETE FROM ro_media where ro_media.id = :mediaId
         ");
         $stm->bindValue('profileId', $profileId);
         $stm->bindValue('mediaId', $mediaId);

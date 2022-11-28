@@ -3,7 +3,7 @@
 declare(strict_types=1);
 session_start();
 
-require('../config/bdd.php');
+require('../lib/bdd.php');
 require('../models/User.php');
 
 /******* Varirables globales ******/
@@ -13,13 +13,10 @@ $mailError           = false;
 $displayConfirmation = false;
 $tokenError          = false;
 
-$token = '2749ec84c3c252bae7539ea0be33c21e9d86550d';
-$_SESSION['token'] = $token;
-
 $password = '';
 $confirmPassword = '';
 $token = $_SESSION['token'];
-$_SESSION['userMail'] = 'ugo17190@gmail.com';
+$sessionMail = $_SESSION['userMail'] ?? '';
 
 if(isset($_POST['update']))
 {

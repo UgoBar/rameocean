@@ -1,0 +1,31 @@
+
+<form action="" id="file-upload-form" method="POST" class="form-horizontal form-material">
+
+    <div class="col-lg-8 col-xlg-9 col-md-12">
+        <div class="card">
+            <div class="card-body">
+
+                <!-- JOB -->
+                <div class="form-group col-12 col-md-6 mb-4">
+                    <label>Date</label>
+                    <div class="col-md-12 border-bottom p-0">
+                        <input type="date" name="date" value="<?=$vars['date']?>" class="form-control p-0 border-0">
+                    </div>
+                </div>
+
+                <!-- DESCRIPTION -->
+                <div class="form-group col-md-12 pb-4 mb-0">
+                    <label for="description">Texte de présentation</label>
+                    <div class="col-md-12 border-bottom p-0">
+                        <textarea class="form-control" name ="description" id="description" rows="6" style="height: 300px;"><?=$vars['description']?></textarea>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4 col-xlg-3 col-md-12"></div>
+    <div class="col-lg-8 col-xlg-9 col-md-12">
+        <button type="submit" class="btn btn-success text-white mt-3"><i class="fas fa-check pr-1"></i><?php echo $vars['id'] ? 'MODIFIER' : 'CREER' ?></button>
+    </div>
+</form>

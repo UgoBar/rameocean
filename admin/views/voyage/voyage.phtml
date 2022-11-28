@@ -1,0 +1,20 @@
+<form action="" id="file-upload-form" method="POST" class="form-horizontal form-material">
+
+    <div class="col-12 col-md-4 col-xlg-3">
+        <div class="card">
+            <div class="card-body">
+                <div class="input-switch">
+                    <label for="is_active">Off</label>
+                    <input type="checkbox" id="is_active" name="is_active" class="input" <?php if($vars['is_active']) :?>checked<?php endif; ?>/>
+                    <label for="is_active" class="switch"></label>
+                    <label for="is_active">On</label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-8 col-xlg-9 col-md-12">
+        <button type="submit" class="btn btn-success text-white mt-3"><i class="fas fa-check pr-1"></i><?php echo $vars['id'] ? 'MODIFIER' : 'CREER' ?></button>
+    </div>
+
+</form>
