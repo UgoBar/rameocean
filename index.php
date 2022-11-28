@@ -1,6 +1,6 @@
 <?php
 
-require('config/bdd.php');
+require('lib/bdd.php');
 
 require('models/Banner.php');
 require('models/Contact.php');
