@@ -56,6 +56,9 @@
 
         <a href="#carouselExampleCaptions"><img src="front/img/logo_rame_ocean.png" alt="Logo de l'association Rame Océan"></a>
         <nav>
+            <?php if($isCurrentVoyage):?>
+                <a href="#currentVoyage">Traversée</a>
+            <?php endif ?>
             <?php if($isIncoming):?>
                 <a href="#incoming">Prochaine traversée</a>
             <?php endif ?>
@@ -67,6 +70,9 @@
     </header>
 
     <nav class="fixedHeader" style="pointer-events: none">
+        <?php if($isCurrentVoyage):?>
+            <a href="#currentVoyage">Traversée</a>
+        <?php endif ?>
         <?php if($isIncoming):?>
             <a href="#incoming">Prochaine traversée</a>
         <?php endif ?>
@@ -86,6 +92,9 @@
         <div class="waves-container">
             <a href="#carouselExampleCaptions"><img src="front/img/logo_rame_ocean_without_baseline.png" alt="Logo de l'association Rame Océan"></a>
             <nav>
+                <?php if($isCurrentVoyage):?>
+                    <a href="#currentVoyage">Traversée</a>
+                <?php endif ?>
                 <?php if($isIncoming):?>
                     <a href="#incoming">Prochaine traversée</a>
                 <?php endif ?>
@@ -157,6 +166,59 @@
             </button>
 
         </div>
+
+        <!-- CURRENT VOYAGE -->
+        <?php if($isCurrentVoyage):?>
+
+            <section id="currentVoyage" class="nav-container">
+                <h1 class="text-marine font-bold uppercase text-center">Traversée en cours</h1>
+
+                <div class="dashboard-wrapper">
+                    <div id="map" class="map-mobile" style="background-image: url('front/img/Oceania_satellite_map.jpg')"></div>
+                    <div class="voyage-header">
+                        <div class="left-side">
+                            <button class="btn active" type="button" class="displayNews active" onclick="displayNews()">Newsletter</button>
+                        </div>
+                        <div class="right-side">
+                            <?php foreach($rowers as $rower): ?>
+                                <div class="avatar" style="background-image: url('uploads/rower/<?=$rower['picture']?>')"
+                                     data-image="<?=$rower['picture']?>"
+                                     data-description="<?=$rower['description']?>"
+                                     onclick="displayRower('<?=$rower['firstname']?> <?=$rower['lastname']?>', '<?=$rower['age']?>', '<?=$rower['job']?>', this)">
+                                </div>
+                            <?php endforeach ?>
+                        </div>
+                    </div>
+
+                    <div id="voyage-content">
+                        <div class="dynamic-section scrollbar-hidden">
+                            <article class="newsletter active">
+                                <?php foreach($newsletter as $news): ?>
+                                    <div class="resume-item">
+                                        <h2><?= strftime("%A %d %B %G", strtotime($news['date'])); ?></h2>
+                                        <div><?=$news['description']?></div>
+                                    </div>
+                                <?php endforeach ?>
+                            </article>
+                            <article class="rower-info slide-right">
+                                <div class="rower-header">
+                                    <figure>
+                                        <img class="active" src="" alt="">
+                                    </figure>
+                                    <div>
+                                        <h2 class="mb-0"></h2>
+                                        <p class="subtitle"><span class="age"></span> ans</p>
+                                        <p class="subtitle job"></p>
+                                    </div>
+                                </div>
+                                <div class="rower-description"></div>
+                            </article>
+                        </div>
+                        <div id="map" class="map-desktop" style="background-image: url('front/img/Oceania_satellite_map.jpg')"></div>
+                    </div>
+                </div>
+            </section>
+        <?php endif ?>
 
         <!-- INFOS -->
         <div id="infos" class="custom-container">

@@ -138,6 +138,83 @@ const checkValidity = (input) => {
     })
 }
 
+// DYNAMIC NEWSLETTER & ROWERS VARS
+const newsletter = document.querySelector('.newsletter');
+const newsBtn    = document.querySelector('.left-side .btn');
+const rowerInfo  = document.querySelector('.rower-info');
+const rowerHeader = document.querySelector('.rower-header');
+const avatars    = document.querySelectorAll('.avatar');
+
+let isRowerDisplayed = false;
+// Display Rower and hide newsletter
+const displayRower = (name, age, job, node) => {
+
+    let description = node.dataset.description
+
+    if(!isRowerDisplayed) {
+        // NEWSLETTER CSS
+        newsletter.classList.add('slide-left');
+        newsletter.classList.remove('active');
+        setTimeout(() => {
+            newsletter.style.display = 'none';
+        }, 500);
+        newsBtn.classList.remove('active');
+
+        // ROWER CONTENT
+        setRowerInfo(node.dataset.image, name, age, job, description)
+
+        // ROWER CSS
+        rowerInfo.classList.remove('slide-right');
+        rowerInfo.classList.add('active');
+        // Avatar active
+        node.classList.add('active');
+
+        isRowerDisplayed = true;
+    } else {
+
+        avatars.forEach(avatar => {
+            avatar.classList.remove('active')
+        })
+        node.classList.add('active');
+
+        rowerInfo.classList.remove('active');
+        rowerInfo.classList.add('slide-left');
+        setTimeout(() => {
+            setRowerInfo(node.dataset.image, name, age, job, description)
+            rowerInfo.classList.remove('slide-left');
+            rowerInfo.classList.add('active');
+        }, 350);
+    }
+};
+
+const displayNews = () => {
+
+    isRowerDisplayed = false;
+
+    // ROWER CSS
+    rowerInfo.classList.remove('active');
+    rowerInfo.classList.add('slide-right');
+    avatars.forEach(avatar => {
+        avatar.classList.remove('active')
+    })
+
+    // // NEWSLETTER CSS
+    newsletter.style.display = 'block';
+    setTimeout(() => {
+        newsletter.classList.add('active');
+        newsletter.classList.remove('slide-left');
+    }, 200);
+    newsBtn.classList.add('active')
+};
+
+function setRowerInfo(img, name, age, job, description) {
+    rowerHeader.querySelector('img').src = 'uploads/rower/' + img;
+    rowerHeader.querySelector('h2').innerHTML = name;
+    rowerHeader.querySelector('.age').innerHTML = age;
+    rowerHeader.querySelector('.job').innerHTML = job;
+    rowerInfo.querySelector('.rower-description').innerHTML = description;
+}
+
 // On submit
 document.querySelector('form').addEventListener( 'submit', (event) => {
 

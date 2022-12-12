@@ -11,6 +11,10 @@ require('models/Partner.php');
 require('models/Profile.php');
 require('models/Trip.php');
 
+require('models/Voyage.php');
+require('models/Rower.php');
+require('models/Newsletter.php');
+
 $mediaRepo    = new Media();
 $bannerRepo   = new Banner($mediaRepo);
 $galleryRepo  = new Gallery($mediaRepo);
@@ -18,15 +22,23 @@ $incomingRepo = new Incoming($mediaRepo);
 $partnerRepo  = new Partner($mediaRepo);
 $profileRepo  = new Profile($mediaRepo);
 $tripRepo     = new Trip($mediaRepo);
+$voyageRepo   = new Voyage();
+$rowerRepo    = new Rower($mediaRepo);
+$newsRepo     = new Newsletter();
 
-$banners  = $bannerRepo->findAll();
-$gallery  = $galleryRepo->findAll();
-$incoming = $incomingRepo->findAll();
-$partners = $partnerRepo->findAll();
-$profile  = $profileRepo->findAll();
-$trips    = $tripRepo->findAll();
+$banners    = $bannerRepo->findAll();
+$gallery    = $galleryRepo->findAll();
+$incoming   = $incomingRepo->findAll();
+$partners   = $partnerRepo->findAll();
+$profile    = $profileRepo->findAll();
+$trips      = $tripRepo->findAll();
+$voyage     = $voyageRepo->findAll();
+$rowers     = $rowerRepo->findAll();
+$newsletter = $newsRepo->findAll();
 
-$isIncoming = $incoming['is_active'];
+$isIncoming = $incoming ? $incoming['is_active'] : false;
+$isCurrentVoyage = $voyage ? $voyage['is_active'] : false;
+setlocale(LC_TIME, "fr_FR", "French");
 
 $errors = [];
 $data = [];

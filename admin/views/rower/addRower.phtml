@@ -45,18 +45,6 @@
         <div class="card">
             <div class="card-body">
 
-                <!-- ALT -->
-                <div class="form-group col-md-6 mb-4">
-                    <label>Alt</label>
-                    <div class="col-md-12 border-bottom p-0">
-                        <input type="text" name="alt" value="<?=$vars['alt']?>" class="form-control p-0 border-0">
-                    </div>
-                    <small class="text-secondary">Le <b>alt</b> sert à l'audio-description des images pour les non-voyants.</small>
-                    <?php if(!empty($vars['errors']) && isset($vars['errors']['alt'])):?>
-                        <p class="text-danger mb-0 pt-1"><?=$vars['errors']['alt']?></p>
-                    <?php endif ?>
-                </div>
-
                 <div class="row" style="padding-left: 15px; padding-right: 15px">
                     <!-- FIRSTNAME -->
                     <div class="form-group col-12 col-md-6 mb-4">
