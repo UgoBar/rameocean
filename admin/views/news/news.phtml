@@ -9,7 +9,7 @@
                     <div class="row bg-white p-3 align-items-center">
                         <div class="col-1 text-center">
                             <div class="flex justify-content-between">
-                                <a href="#" data-toggle="modal" data-target="#rower-<?=$newsletter['id']?>" class="btn btn-danger"><i class="fas fa-window-close"></i></a>
+                                <a href="#" data-toggle="modal" data-target="#news-<?=$newsletter['id']?>" class="btn btn-danger"><i class="fas fa-window-close"></i></a>
                                 <a href="index.php?name=addNews&id=<?=$newsletter['id'] ?>" class="btn btn-primary"><i class="fas fa-edit"></i></a>
                             </div>
                         </div>
@@ -21,7 +21,7 @@
                 </div>
 
                 <!-- Modal de suppression -->
-                <div class="modal fade" id="rower-<?=$newsletter['id']?>" tabindex="-1" aria-labelledby="supprimer" aria-hidden="true">
+                <div class="modal fade" id="news-<?=$newsletter['id']?>" tabindex="-1" aria-labelledby="supprimer" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -45,5 +45,5 @@
         </div>
     </form>
 <?php else:?>
-    <p>Aucun rameur pour le moment.</p>
+    <p>Aucune news pour le moment!</p>
 <?php endif;?>

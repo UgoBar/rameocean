@@ -14,27 +14,37 @@ require('models/Trip.php');
 require('models/Voyage.php');
 require('models/Rower.php');
 require('models/Newsletter.php');
+require('models/Coordinate.php');
 
-$mediaRepo    = new Media();
-$bannerRepo   = new Banner($mediaRepo);
-$galleryRepo  = new Gallery($mediaRepo);
-$incomingRepo = new Incoming($mediaRepo);
-$partnerRepo  = new Partner($mediaRepo);
-$profileRepo  = new Profile($mediaRepo);
-$tripRepo     = new Trip($mediaRepo);
-$voyageRepo   = new Voyage();
-$rowerRepo    = new Rower($mediaRepo);
-$newsRepo     = new Newsletter();
+$mediaRepo      = new Media();
+$bannerRepo     = new Banner($mediaRepo);
+$galleryRepo    = new Gallery($mediaRepo);
+$incomingRepo   = new Incoming($mediaRepo);
+$partnerRepo    = new Partner($mediaRepo);
+$profileRepo    = new Profile($mediaRepo);
+$tripRepo       = new Trip($mediaRepo);
+$voyageRepo     = new Voyage();
+$rowerRepo      = new Rower($mediaRepo);
+$newsRepo       = new Newsletter();
+$coordinateRepo = new Coordinate();
 
-$banners    = $bannerRepo->findAll();
-$gallery    = $galleryRepo->findAll();
-$incoming   = $incomingRepo->findAll();
-$partners   = $partnerRepo->findAll();
-$profile    = $profileRepo->findAll();
-$trips      = $tripRepo->findAll();
-$voyage     = $voyageRepo->findAll();
-$rowers     = $rowerRepo->findAll();
-$newsletter = $newsRepo->findAll();
+$banners     = $bannerRepo->findAll();
+$gallery     = $galleryRepo->findAll();
+$incoming    = $incomingRepo->findAll();
+$partners    = $partnerRepo->findAll();
+$profile     = $profileRepo->findAll();
+$trips       = $tripRepo->findAll();
+$voyage      = $voyageRepo->findAll();
+$rowers      = $rowerRepo->findAll();
+$newsletter  = $newsRepo->findAll();
+$coordinates = $coordinateRepo->findAll();
+
+$mainPartners          = $partnerRepo->findByCategory($partnerRepo::PARTNER_MAIN);
+$officialPartners      = $partnerRepo->findByCategory($partnerRepo::PARTNER_OFFICIAL);
+$institutionalPartners = $partnerRepo->findByCategory($partnerRepo::PARTNER_INSTITUTIONAL);
+$technicPartners       = $partnerRepo->findByCategory($partnerRepo::PARTNER_TECHNIC);
+
+$partnerCategories = $partnerRepo->getPartnerCategories();
 
 $isIncoming = $incoming ? $incoming['is_active'] : false;
 $isCurrentVoyage = $voyage ? $voyage['is_active'] : false;

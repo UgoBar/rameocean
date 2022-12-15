@@ -70,17 +70,14 @@
         </div>
     </div>
 
-    <!-- ORDRE AFFICHAGE -->
+    <!-- CATEGORY -->
     <div class="form-group mb-4">
-        <label>Afficher en position n°</label>
-        <div class="col-md-6 p-0">
-            <div class="value" id="position"><?=$vars['position']?></div>
-            <input type="range" min="1" max="20" step="1" name="position" class="form-control-range" value="<?=$vars['position']?>" oninput="rangeValue(this, '#position')">
-        </div>
-        <small class="text-secondary d-block mt-2">Pour info tu as déjà <?=$vars['count']['partner_count']?> partenaire(s) enregistré(s).</small>
-        <?php if(!empty($vars['errors']) && isset($vars['errors']['position'])):?>
-            <p class="text-danger mb-0 pt-1"><?=$vars['errors']['position']?></p>
-        <?php endif ?>
+        <label>Choix de la catégorie</label>
+        <select class="custom-select text-center p-2 mb-4" id="display" name="category" style="width: 250px; display: block; background: white;">
+            <?php foreach($vars['categories'] as $key => $category) {
+                echo "<option value='$key'>$category</option>";
+            } ?>
+        </select>
     </div>
 
     <!-- BOUTON ENVOYER / MODIFIER ? -->

@@ -198,7 +198,7 @@ const displayNews = () => {
         avatar.classList.remove('active')
     })
 
-    // // NEWSLETTER CSS
+    // NEWSLETTER CSS
     newsletter.style.display = 'block';
     setTimeout(() => {
         newsletter.classList.add('active');
@@ -213,6 +213,29 @@ function setRowerInfo(img, name, age, job, description) {
     rowerHeader.querySelector('.age').innerHTML = age;
     rowerHeader.querySelector('.job').innerHTML = job;
     rowerInfo.querySelector('.rower-description').innerHTML = description;
+}
+
+function displayPartners(partnerCategory, btn) {
+    // Récupérer la liste active
+    let activePartners = document.querySelector('.category-partner.active');
+    let activeBtn = document.querySelector('.blue-btn.active')
+
+    let selectedPartners =  document.querySelector('#' + partnerCategory);
+    let selectedBtn = btn;
+
+    if(activePartners !== selectedPartners) {
+        // BTN
+        activeBtn.classList.remove('active');
+        btn.classList.add('active');
+        // PARTNER WRAPPER
+
+            activePartners.classList.add('slide-left')
+            activePartners.classList.remove('active')
+
+            selectedPartners.classList.add('active');
+            selectedPartners.classList.remove('slide-left');
+
+    }
 }
 
 // On submit

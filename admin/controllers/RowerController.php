@@ -49,7 +49,7 @@ class RowerController extends DefaultController
             $lastname    = $rower['lastname'];
             $age         = $rower['age'];
             $job         = $rower['job'];
-            $description = $rower['job'];
+            $description = $rower['description'];
             $alt         = $rower['alt'];
             $oldPicture  = $rower['picture'];
 

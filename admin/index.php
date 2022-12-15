@@ -18,10 +18,12 @@ require('controllers/UserController.php');
 require('controllers/VoyageController.php');
 require('controllers/RowerController.php');
 require('controllers/NewsletterController.php');
+require('controllers/CoordinateController.php');
 
 $defaultController  = new DefaultController();
 $defaultController -> verifyConnection();
-$userController        = new UserController();
+$userController     = new UserController();
+setlocale(LC_TIME, "fr_FR", "French");
 
 if(isset($_GET['name'])) {
 
@@ -36,7 +38,6 @@ if(isset($_GET['name'])) {
             $voyageController      = new VoyageController();
             $voyageController -> getVoyage();
             break;
-
 // ---------- RAMEURS ---------- \\
         case 'rowers':
             $rowerController = new RowerController();
@@ -46,8 +47,7 @@ if(isset($_GET['name'])) {
             $rowerController = new RowerController();
             $rowerController -> addRower();
             break;
-
-// ---------- RAMEURS ---------- \\
+// ---------- NEWSLETTER ---------- \\
         case 'news':
             $newsletterController = new NewsletterController();
             $newsletterController -> getNews();
@@ -55,6 +55,16 @@ if(isset($_GET['name'])) {
         case 'addNews':
             $newsletterController = new NewsletterController();
             $newsletterController -> addNews();
+            break;
+// ---------- COORDINATES ---------- \\
+        case 'coordinates':
+            $coordinateController = new CoordinateController();
+            $coordinateController -> getCoordinates();
+            break;
+        case 'addCoordinate':
+
+            $coordinateController = new CoordinateController();
+            $coordinateController -> addCoordinate();
             break;
 
 // ---------- BANNER ---------- \\

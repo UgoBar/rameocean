@@ -5,11 +5,13 @@
         <div class="card">
             <div class="card-body">
 
-                <!-- JOB -->
-                <div class="form-group col-12 col-md-6 mb-4">
-                    <label>Date</label>
-                    <div class="col-md-12 border-bottom p-0">
-                        <input type="date" name="date" value="<?=$vars['date']?>" class="form-control p-0 border-0">
+                <!-- DATE -->
+                <div class="row mt-4" style="padding-left: 15px; padding-right: 15px">
+                    <div class="form-group col-12 col-md-4 mb-4">
+                        <label>Date</label>
+                        <div class="col-md-12 border-bottom p-0">
+                            <input type="date" name="date" value="<?=$vars['date']?>" class="form-control p-0 border-0">
+                        </div>
                     </div>
                 </div>
 
@@ -20,7 +22,6 @@
                         <textarea class="form-control" name ="description" id="description" rows="6" style="height: 300px;"><?=$vars['description']?></textarea>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>

@@ -29,6 +29,9 @@
 
     <!-- CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tw-elements/dist/css/index.min.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+          integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
+          crossorigin=""/>
     <link rel="stylesheet" href="front/css/normalize.css" type="text/css">
     <link rel="stylesheet" href="front/css/style.css" type="text/css">
     <link rel="stylesheet" href="front/css/timeline.css" type="text/css">
@@ -57,7 +60,7 @@
         <a href="#carouselExampleCaptions"><img src="front/img/logo_rame_ocean.png" alt="Logo de l'association Rame Océan"></a>
         <nav>
             <?php if($isCurrentVoyage):?>
-                <a href="#currentVoyage">Traversée</a>
+                <a href="#currentVoyage">Traversée 2023</a>
             <?php endif ?>
             <?php if($isIncoming):?>
                 <a href="#incoming">Prochaine traversée</a>
@@ -71,7 +74,7 @@
 
     <nav class="fixedHeader" style="pointer-events: none">
         <?php if($isCurrentVoyage):?>
-            <a href="#currentVoyage">Traversée</a>
+            <a href="#currentVoyage">Traversée 2023</a>
         <?php endif ?>
         <?php if($isIncoming):?>
             <a href="#incoming">Prochaine traversée</a>
@@ -171,10 +174,9 @@
         <?php if($isCurrentVoyage):?>
 
             <section id="currentVoyage" class="nav-container">
-                <h1 class="text-marine font-bold uppercase text-center">Traversée en cours</h1>
+                <h1 class="text-marine font-bold uppercase text-center">Traversée 2023</h1>
 
                 <div class="dashboard-wrapper">
-                    <div id="map" class="map-mobile" style="background-image: url('front/img/Oceania_satellite_map.jpg')"></div>
                     <div class="voyage-header">
                         <div class="left-side">
                             <button class="btn active" type="button" class="displayNews active" onclick="displayNews()">Newsletter</button>
@@ -183,8 +185,8 @@
                             <?php foreach($rowers as $rower): ?>
                                 <div class="avatar" style="background-image: url('uploads/rower/<?=$rower['picture']?>')"
                                      data-image="<?=$rower['picture']?>"
-                                     data-description="<?=$rower['description']?>"
-                                     onclick="displayRower('<?=$rower['firstname']?> <?=$rower['lastname']?>', '<?=$rower['age']?>', '<?=$rower['job']?>', this)">
+                                     data-description="<?= htmlspecialchars($rower['description'], ENT_QUOTES); ?>"
+                                     onclick="displayRower('<?=$rower['firstname']?> <?=$rower['lastname']?>', '<?=$rower['age']?>', '<?=$rower['job'] ?: ''?>', this)">
                                 </div>
                             <?php endforeach ?>
                         </div>
@@ -195,7 +197,7 @@
                             <article class="newsletter active">
                                 <?php foreach($newsletter as $news): ?>
                                     <div class="resume-item">
-                                        <h2><?= strftime("%A %d %B %G", strtotime($news['date'])); ?></h2>
+                                        <h2><?= utf8_encode(strftime("%A %d %B %G", strtotime($news['date']))); ?></h2>
                                         <div><?=$news['description']?></div>
                                     </div>
                                 <?php endforeach ?>
@@ -214,7 +216,7 @@
                                 <div class="rower-description"></div>
                             </article>
                         </div>
-                        <div id="map" class="map-desktop" style="background-image: url('front/img/Oceania_satellite_map.jpg')"></div>
+                        <div id="map" class="map-desktop"></div>
                     </div>
                 </div>
             </section>
@@ -341,12 +343,71 @@
         <section id="partners">
             <h1 class="text-white uppercase font-bold text-center">Partenaires</h1>
             <div class="custom-container">
-                <?php foreach($partners as $partner): ?>
-                    <figure>
-                        <figcaption><?= $partner['title'] ?></figcaption>
-                        <img src="uploads/partner/<?= $partner['picture'] ?>" alt="<?= $partner['alt'] ?>">
-                    </figure>
-                <?php endforeach ?>
+                <div class="btn-and-partners">
+                    <div class="partners-btn">
+                        <?php if($mainPartners):?>
+                            <button type="button" class="blue-btn displayNews active" onclick="displayPartners('partner-<?=$partnerRepo::PARTNER_MAIN?>', this)"><?=$partnerCategories[$partnerRepo::PARTNER_MAIN]?></button>
+                        <?php endif ?>
+                        <?php if($officialPartners):?>
+                            <button type="button" class="blue-btn displayNews" onclick="displayPartners('partner-<?=$partnerRepo::PARTNER_OFFICIAL?>', this)"><?=$partnerCategories[$partnerRepo::PARTNER_OFFICIAL]?></button>
+                        <?php endif ?>
+                        <?php if($institutionalPartners):?>
+                            <button type="button" class="blue-btn displayNews" onclick="displayPartners('partner-<?=$partnerRepo::PARTNER_INSTITUTIONAL?>', this)"><?=$partnerCategories[$partnerRepo::PARTNER_INSTITUTIONAL]?></button>
+                        <?php endif ?>
+                        <?php if($technicPartners):?>
+                            <button type="button" class="blue-btn displayNews" onclick="displayPartners('partner-<?=$partnerRepo::PARTNER_TECHNIC?>', this)"><?=$partnerCategories[$partnerRepo::PARTNER_TECHNIC]?></button>
+                        <?php endif ?>
+                    </div>
+                    <div class="partners">
+                        <!-- MAIN PARTNERS -->
+                        <?php if($mainPartners):?>
+                            <div class="category-partner active" id="partner-<?=$partnerRepo::PARTNER_MAIN?>">
+                                <?php foreach($mainPartners as $mainPartner): ?>
+                                    <figure>
+                                        <figcaption><?=$mainPartner['title']?></figcaption>
+                                        <img src="uploads/partner/<?= $mainPartner['picture'] ?>" alt="<?= $mainPartner['alt'] ?>">
+                                    </figure>
+                                <?php endforeach ?>
+                            </div>
+                        <?php endif ?>
+
+                        <!-- OFFICIAL PARTNERS -->
+                        <?php if($officialPartners):?>
+                            <div class="category-partner slide-left" id="partner-<?=$partnerRepo::PARTNER_OFFICIAL?>">
+                                <?php foreach($officialPartners as $officialPartner): ?>
+                                    <figure>
+                                        <figcaption><?=$officialPartner['title']?></figcaption>
+                                        <img src="uploads/partner/<?= $officialPartner['picture'] ?>" alt="<?= $officialPartner['alt'] ?>">
+                                    </figure>
+                                <?php endforeach ?>
+                            </div>
+                        <?php endif ?>
+
+                        <!-- INSTITUTIONAL PARTNERS -->
+                        <?php if($institutionalPartners):?>
+                            <div class="category-partner slide-left" id="partner-<?=$partnerRepo::PARTNER_INSTITUTIONAL?>">
+                                <?php foreach($institutionalPartners as $institutionalPartner): ?>
+                                    <figure>
+                                        <figcaption><?=$institutionalPartner['title']?></figcaption>
+                                        <img src="uploads/partner/<?= $institutionalPartner['picture'] ?>" alt="<?= $institutionalPartner['alt'] ?>">
+                                    </figure>
+                                <?php endforeach ?>
+                            </div>
+                        <?php endif ?>
+
+                        <!-- TECHNICAL PARTNERS -->
+                        <?php if($technicPartners):?>
+                            <div class="category-partner slide-left" id="partner-<?=$partnerRepo::PARTNER_TECHNIC?>">
+                                <?php foreach($technicPartners as $technicPartner): ?>
+                                    <figure>
+                                        <figcaption><?=$technicPartner['title']?></figcaption>
+                                        <img src="uploads/partner/<?= $technicPartner['picture'] ?>" alt="<?= $technicPartner['alt'] ?>">
+                                    </figure>
+                                <?php endforeach ?>
+                            </div>
+                        <?php endif ?>
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -435,6 +496,94 @@
 
     <!-- JS TAILWIND -->
     <script src="https://cdn.jsdelivr.net/npm/tw-elements/dist/js/index.min.js"></script>
+    <!-- JS LEAFLET -->
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
+    <!-- MAP -->
+    <script>
+        let hasTouchScreen = false;
+
+        if ("maxTouchPoints" in navigator) {
+            hasTouchScreen = navigator.maxTouchPoints > 0;
+        } else if ("msMaxTouchPoints" in navigator) {
+            hasTouchScreen = navigator.msMaxTouchPoints > 0;
+        } else {
+            let mQ = window.matchMedia && matchMedia("(pointer:coarse)");
+            if (mQ && mQ.media === "(pointer:coarse)") {
+                hasTouchScreen = !!mQ.matches;
+            } else if ('orientation' in window) {
+                hasTouchScreen = true; // deprecated, but good fallback
+            } else {
+                // Only as a last resort, fall back to user agent sniffing
+                let UA = navigator.userAgent;
+                hasTouchScreen = (
+                    /\b(BlackBerry|webOS|iPhone|IEMobile)\b/i.test(UA) ||
+                    /\b(Android|Windows Phone|iPad|iPod)\b/i.test(UA)
+                );
+            }
+        }
+
+        if(hasTouchScreen) {
+            // mobile stuff
+            const dashWrap = document.querySelector('.dashboard-wrapper');
+            const voyageHeader = document.querySelector('.voyage-header');
+            const mapDiv = document.getElementById('map');
+            dashWrap.insertBefore(mapDiv, voyageHeader);
+            mapDiv.classList.remove('map-desktop');
+            mapDiv.classList.add('map-mobile');
+        }
+
+        let map = L.map('map').setView([30.998911, -33.566280], 4);
+
+        L.tileLayer('https://tile.thunderforest.com/transport-dark/{z}/{x}/{y}.png?apikey=2d32a4cc5e12405ab5cfc6c0eb84266d', {
+            maxZoom: 19,
+            type: 'normal',
+            format: 'png',
+            attribution: '&copy; <a href="http://www.thunderforest.com/">Thunderforest</a>, &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+        }).addTo(map);
+
+        const pointsForJson  = [];
+
+        let rowerIcon = new L.Icon({
+            iconUrl: 'https://www.rameocean.fr/front/img/rower-icon.png',
+            iconSize: [35, 30],
+            iconAnchor: [10, 30],
+            popupAnchor: [1, -34],
+            shadowSize: [41, 41]
+        });
+
+         // Markers
+        let popupHtml = `<h6>Point de départ</h6>`
+        L.marker([<?=$voyage['latitude']?>, <?=$voyage['longitude']?>]).bindPopup(popupHtml).addTo(map).on('click', onPinClick)
+        <?php foreach($coordinates as $coordinate): ?>
+            pointsForJson .push([<?=$coordinate['longitude']?>, <?=$coordinate['latitude']?>])
+            popupHtml = `<h6><?= utf8_encode(strftime("%A %d %B %G", strtotime($coordinate['date']))); ?></h6><p><?=$coordinate['hour']?></p>`
+            L.marker([<?=$coordinate['latitude']?>, <?=$coordinate['longitude']?>], {icon: rowerIcon}).bindPopup(popupHtml).addTo(map).on('click', onPinClick)
+        <?php endforeach ?>
+        pointsForJson .push([<?=$voyage['longitude']?>, <?=$voyage['latitude']?>])
+
+        var polyline = L.polyline(lngLatArrayToLatLng(pointsForJson), {
+            color: 'white',
+            weight: 2,
+            smoothFactor: -1
+        }).addTo(map);
+        map.fitBounds(polyline.getBounds());
+
+        console.log(latAndLng);
+
+        function lngLatArrayToLatLng(lngLatArray) {
+            return lngLatArray.map(lngLatToLatLng);
+        }
+
+        function lngLatToLatLng(lngLat) {
+            return [lngLat[1], lngLat[0]];
+        }
+
+        function onPinClick() {
+            console.log('Hello');
+        }
+    </script>
+    <!-- END MAP -->
+
     <!-- jQUERY -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
@@ -442,6 +591,19 @@
     <script src="front/js/script.js"></script>
     <script src="front/js/movingWaves.js"></script>
     <script src="front/js/gallery.js"></script>
+
+    <script>
+        window.axeptioSettings = {
+            clientId: "6396df5a0086644314b5c087",
+            cookiesVersion: "rameocean-fr",
+        };
+
+        (function(d, s) {
+            var t = d.getElementsByTagName(s)[0], e = d.createElement(s);
+            e.async = true; e.src = "//static.axept.io/sdk.js";
+            t.parentNode.insertBefore(e, t);
+        })(document, "script");
+    </script>
 </body>
 
 </html>

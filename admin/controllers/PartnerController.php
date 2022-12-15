@@ -16,6 +16,7 @@ class PartnerController extends DefaultController
     public function getPartners()
     {
         $partners = $this -> partner -> findAll();
+        $categories = $this->partner->getPartnerCategories();
 
         foreach ($partners as $partner) {
             if (isset($_POST['delete-partner-' . $partner['id']])) {
@@ -29,22 +30,23 @@ class PartnerController extends DefaultController
             }
         }
 
-        if(isset($_POST['order'])) {
+        if(isset($_POST['categories'])) {
             foreach ($partners as $partner) {
                 $id       = (int)$partner['id'];
                 $picture  = $partner['picture'];
                 $alt      = $partner['alt'];
                 $title    = $partner['title'];
-                $position = (int)$_POST['position-'.$partner['id'].''];
+                $category = (int)$_POST['category-'.$partner['id'].''];
 
-                $this -> partner -> update($id, $picture, $alt, $title, $position);
-                $this -> addFlashBag("L'ordre des partenaires a bien été modifié !", 'success');
+                $this -> partner -> update($id, $picture, $alt, $title, $category);
+                $this -> addFlashBag("Les categories des partenaires ont bien été modifiés !", 'success');
                 header('Location:index.php?name=partners');
             }
         }
 
         $this -> getLayout('partner/partners', 'Partenaires', $this->getFlashBag(), [
             'partners' => $partners,
+            'categories' => $categories,
         ]);
     }
 
@@ -56,6 +58,7 @@ class PartnerController extends DefaultController
         $id = array_key_exists('id',$_GET) ? (int)$_GET['id'] : null;
         $picture = '';
         $count = $this -> partner -> count();
+        $categories = $this->partner->getPartnerCategories();
 
         // EDITION MODE
         if($id) {
@@ -63,7 +66,7 @@ class PartnerController extends DefaultController
             $partner = $this -> partner -> findById($id);
 
             $title      = $partner['title'];
-            $position   = $partner['position'];
+            $category   = $partner['category'];
             $alt        = $partner['alt'];
             $oldPicture = $partner['picture'];
 
@@ -74,7 +77,7 @@ class PartnerController extends DefaultController
 
             // On hydrate les variables avec les données reçues du formulaire
             $title = (isset($_POST['title'])) ? trim($_POST['title']) : '';
-            $position = (int)$_POST['position'];
+            $category = (int)$_POST['category'];
             $alt = (isset($_POST['alt'])) ? trim($_POST['alt']) : '';
             $oldPicture = (isset($_POST['oldPicture'])) ? trim($_POST['oldPicture']) : null;
 
@@ -94,10 +97,10 @@ class PartnerController extends DefaultController
                 $picture = $this->keepOrReplacePicture($picture, $oldPicture, 'partner');
 
                 if (!$id) {
-                    $this -> partner -> add($picture, $alt, $title, $position);
+                    $this -> partner -> add($picture, $alt, $title, $category);
                     $this -> addFlashBag("Le partenaire a bien été ajouté", 'success');
                 } else {
-                    $this->partner->update($id, $picture, $alt, $title, $position);
+                    $this->partner->update($id, $picture, $alt, $title, $category);
                     $this -> addFlashBag("Le partenaire a bien été mise à jour", 'success');
                 }
                 header('Location:index.php?name=partners');
@@ -110,7 +113,8 @@ class PartnerController extends DefaultController
             'picture'    => $picture,
             'alt'        => $alt ?? '',
             'title'      => $title ?? '',
-            'position'   => $position ?? $count['partner_count'] + 1,
+            'category'   => $category ?? 10,
+            'categories' => $categories,
             'errors'     => $errors ?? [],
             'oldPicture' => $oldPicture ?? null,
             'count'      => $count

@@ -15,12 +15,11 @@
                         <!-- TITRE -->
                         <h3 class="card-title text-center"><?=$partner['title']?></h3>
                         <!-- ORDRE AFFICHAGE -->
-                        <p class="mb-1 pt-2">Ordre d'affichage</p>
-                        <select class="custom-select text-center p-2 mb-4" id="display" name="position-<?=$partner['id'] ?>">
-                            <option value="null" selected>Choisir un chiffre</option>
-                            <?php for ($i = 1; $i <= count($vars['partners']); $i++) {
-                                $selected = $partner['position'] == $i ? 'selected' : '';
-                                echo "<option value='$i' $selected>$i</option>";
+                        <p class="mb-1 pt-2">Catégorie</p>
+                        <select class="custom-select text-center p-2 mb-4" id="display" name="category-<?=$partner['id'] ?>">
+                            <?php foreach($vars['categories'] as $key => $category) {
+                                $selected = $partner['category'] == $key ? 'selected' : '';
+                                echo "<option value='$key' $selected>$category</option>";
                             } ?>
                         </select>
                         <!-- BOUTON MODIFIER -->
@@ -61,7 +60,7 @@
                                 </button>
                             </div>
                             <div class="modal-body">
-                                Êtes-vous sûr de vouloir supprimer la photo <b><?=$partner['title']?></b>?
+                                Êtes-vous sûr de vouloir supprimer le partenaire <b><?=$partner['title']?></b>?
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
@@ -76,7 +75,7 @@
         <?php endforeach ?>
     </div>
     <?php if($vars['partners']) :?>
-        <button type="submit" class="btn btn-success text-white mt-3" name="order" value="order"><i class="fas fa-check pr-1"></i> Changer l'ordre</button>
+        <button type="submit" class="btn btn-success text-white mt-3" name="categories" value="order"><i class="fas fa-check pr-1"></i>Changer les catégories</button>
     <?php endif ;?>
 </form>
 <?php endif;?>

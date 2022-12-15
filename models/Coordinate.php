@@ -1,6 +1,6 @@
 <?php
 
-class Newsletter
+class Coordinate
 {
     private $dbh;
 
@@ -9,48 +9,52 @@ class Newsletter
         $this->dbh = dbConnexion();
     }
 
-    public function add($date, string $description)
+    public function add($date, string $hour, $lat, $lon)
     {
 
         $this->dbh->setAttribute(PDO::ATTR_EMULATE_PREPARES, true);
 
         $stm = $this->dbh->prepare (
-            "INSERT INTO ro_newsletter (date, description)
-                    VALUES (:date, :description)"
+            "INSERT INTO ro_coordinate (date, hour, latitude, longitude)
+                    VALUES (:date, :hour, :lat, :lon)"
         );
 
         $stm->bindValue('date', $date);
-        $stm->bindValue('description', $description);
+        $stm->bindValue('hour', $hour);
+        $stm->bindValue('lat', $lat);
+        $stm->bindValue('lon', $lon);
         $stm->execute();
 
         return $this->dbh->lastInsertId();
     }
 
-    public function update(int $newsId, $date, string $description)
+    public function update(int $coordinateId, $date, string $hour, $lat, $lon)
     {
         $this->dbh->setAttribute(PDO::ATTR_EMULATE_PREPARES, true);
 
         $stm = $this->dbh->prepare("
-            UPDATE ro_newsletter n SET n.date = :date, n.description = :description WHERE n.id = :newsId;
+            UPDATE ro_coordinate c SET c.date = :date, c.hour = :hour, c.latitude = :lat, c.longitude = :lon WHERE c.id = :coordinateId;
         ");
 
-        $stm->bindValue('newsId', $newsId, PDO::PARAM_INT);
+        $stm->bindValue('coordinateId', $coordinateId, PDO::PARAM_INT);
         $stm->bindValue('date', $date);
-        $stm->bindValue('description', $description);
+        $stm->bindValue('hour', $hour);
+        $stm->bindValue('lat', $lat);
+        $stm->bindValue('lon', $lon);
         $stm->execute();
 
         $stm->execute();
         return $this->dbh->lastInsertId();
     }
 
-    public function delete(int $newsId)
+    public function delete(int $coordinateId)
     {
         $this->dbh->setAttribute(PDO::ATTR_EMULATE_PREPARES, true);
 
         $stm = $this->dbh->prepare("
-            DELETE FROM ro_newsletter WHERE id = :newsId;
+            DELETE FROM ro_coordinate WHERE id = :coordinateId;
         ");
-        $stm->bindValue('newsId', $newsId);
+        $stm->bindValue('coordinateId', $coordinateId);
 
         $stm->execute();
     }
@@ -61,8 +65,8 @@ class Newsletter
 
         $stm = $this->dbh->prepare("
             SELECT *
-            FROM ro_newsletter n
-            ORDER BY n.date DESC;
+            FROM ro_coordinate c
+            ORDER BY c.date DESC;
         ");
 
         $stm->execute();
@@ -73,8 +77,8 @@ class Newsletter
     {
         $stm = $this->dbh->prepare("
             SELECT *
-            FROM ro_newsletter n
-            WHERE n.id = :id
+            FROM ro_coordinate c
+            WHERE c.id = :id
         ");
 
         $stm->bindValue('id', $id);

@@ -1,20 +1,49 @@
 <form action="" id="file-upload-form" method="POST" class="form-horizontal form-material">
 
-    <div class="col-12 col-md-4 col-xlg-3">
+    <div class="col-lg-8 col-xlg-9 col-md-12">
         <div class="card">
             <div class="card-body">
+
                 <div class="input-switch">
                     <label for="is_active">Off</label>
                     <input type="checkbox" id="is_active" name="is_active" class="input" <?php if($vars['is_active']) :?>checked<?php endif; ?>/>
                     <label for="is_active" class="switch"></label>
                     <label for="is_active">On</label>
                 </div>
+
+                <div class="row mt-5" style="padding-left: 15px; padding-right: 15px">
+                    <h4>Point de départ</h4>
+                </div>
+                <div class="row" style="padding-left: 15px; padding-right: 15px">
+                    <!-- LATITUDE -->
+                    <div class="form-group col-12 col-md-6 mb-4">
+                        <label>Latitude</label>
+                        <div class="col-md-12 border-bottom p-0">
+                            <input type="text" name="latitude" value="<?=$vars['latitude']?>" class="form-control p-0 border-0">
+                        </div>
+                        <?php if(!empty($vars['errors']) && isset($vars['errors']['latitude'])):?>
+                            <p class="text-danger mb-0 pt-1"><?=$vars['errors']['latitude']?></p>
+                        <?php endif ?>
+                    </div>
+
+                    <!-- LONGITUDE -->
+                    <div class="form-group col-12 col-md-6 mb-4">
+                        <label>Longitude</label>
+                        <div class="col-md-12 border-bottom p-0">
+                            <input type="text" name="longitude" value="<?=$vars['longitude']?>" class="form-control p-0 border-0">
+                        </div>
+                        <?php if(!empty($vars['errors']) && isset($vars['errors']['longitude'])):?>
+                            <p class="text-danger mb-0 pt-1"><?=$vars['errors']['longitude']?></p>
+                        <?php endif ?>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
 
     <div class="col-lg-8 col-xlg-9 col-md-12">
-        <button type="submit" class="btn btn-success text-white mt-3"><i class="fas fa-check pr-1"></i><?php echo $vars['id'] ? 'MODIFIER' : 'CREER' ?></button>
+        <button type="submit" name="submit" class="btn btn-success text-white mt-3"><i class="fas fa-check pr-1"></i><?php echo $vars['id'] ? 'MODIFIER' : 'CREER' ?></button>
     </div>
 
 </form>
