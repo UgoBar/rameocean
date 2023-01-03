@@ -25,7 +25,7 @@ $profileRepo    = new Profile($mediaRepo);
 $tripRepo       = new Trip($mediaRepo);
 $voyageRepo     = new Voyage();
 $rowerRepo      = new Rower($mediaRepo);
-$newsRepo       = new Newsletter();
+$newsRepo       = new Newsletter($mediaRepo);
 $coordinateRepo = new Coordinate();
 
 $banners     = $bannerRepo->findAll();

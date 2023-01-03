@@ -139,11 +139,41 @@ const checkValidity = (input) => {
 }
 
 // DYNAMIC NEWSLETTER & ROWERS VARS
-const newsletter = document.querySelector('.newsletter');
-const newsBtn    = document.querySelector('.left-side .btn');
-const rowerInfo  = document.querySelector('.rower-info');
+const newsletter  = document.querySelector('.newsletter');
+const newsBtn     = document.querySelector('.left-side .btn');
+const rowerInfo   = document.querySelector('.rower-info');
 const rowerHeader = document.querySelector('.rower-header');
-const avatars    = document.querySelectorAll('.avatar');
+const avatars     = document.querySelectorAll('.avatar');
+
+// --------------------------------------------------- MODAL FOR IMAGES
+// all images inside the image modal content class
+const lightboxImages = document.querySelectorAll('.image-modal-content img');
+const body = document.querySelector('body');
+const modalPopup = document.querySelector('.image-modal-popup');
+
+// closes modal on clicking anywhere and adds overflow back
+const closeModal = () => {
+    body.style.overflow = 'auto';
+    modalPopup.style.display = 'none';
+};
+modalPopup.querySelector('span').addEventListener('click', () => {
+    closeModal();
+})
+document.addEventListener('click', (event) => {
+    if(event.target === modalPopup) {
+        closeModal();
+    }
+});
+
+// loops over each modal content img and adds click event functionality
+lightboxImages.forEach(img => {
+    img.addEventListener('click', e => {
+        body.style.overflow = 'hidden';
+        modalPopup.style.display = 'block';
+        document.querySelector(`.image-modal-popup img`).src = img.src;
+    });
+});
+// --------------------------------------------------- END MODAL FOR IMAGES
 
 let isRowerDisplayed = false;
 // Display Rower and hide newsletter

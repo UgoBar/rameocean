@@ -47,7 +47,6 @@
     <!-- End Google Tag Manager -->
 
 </head>
-
 <body>
 
     <!-- Google Tag Manager (noscript) -->
@@ -170,6 +169,20 @@
 
         </div>
 
+
+        <!-- PreviewImage modal -->
+            <!-- Modal -->
+            <div class="image-modal-popup">
+                <div class="wrapper">
+                    <div class="img-and-cross">
+                        <span>&times;</span>
+                        <img src="" alt="Image Modal">
+                    </div>
+                </div>
+            </div>
+        <!-- END PreviewImage modal -->
+
+
         <!-- CURRENT VOYAGE -->
         <?php if($isCurrentVoyage):?>
 
@@ -199,13 +212,18 @@
                                     <div class="resume-item">
                                         <h2><?= utf8_encode(strftime("%A %d %B %G", strtotime($news['date']))); ?></h2>
                                         <div><?=$news['description']?></div>
+                                        <?php if($news['picture']):?>
+                                            <div class="image-modal-content">
+                                                <img class="news-img" src="uploads/newsletter/<?=$news['picture']?>" alt="<?=$news['alt']?>"/>
+                                            </div>
+                                        <?php endif ?>
                                     </div>
                                 <?php endforeach ?>
                             </article>
                             <article class="rower-info slide-right">
                                 <div class="rower-header">
-                                    <figure>
-                                        <img class="active" src="" alt="">
+                                    <figure class="image-modal-content">
+                                        <img class="active" src="" alt="" data-bs-target="#staticBackdrop">
                                     </figure>
                                     <div>
                                         <h2 class="mb-0"></h2>
@@ -556,7 +574,7 @@
         L.marker([<?=$voyage['latitude']?>, <?=$voyage['longitude']?>]).bindPopup(popupHtml).addTo(map).on('click', onPinClick)
         <?php foreach($coordinates as $coordinate): ?>
             pointsForJson .push([<?=$coordinate['longitude']?>, <?=$coordinate['latitude']?>])
-            popupHtml = `<h6><?= utf8_encode(strftime("%A %d %B %G", strtotime($coordinate['date']))); ?></h6><p><?=$coordinate['hour']?></p>`
+            popupHtml = `<h2><?= utf8_encode(strftime("%A %d %B %G", strtotime($coordinate['date']))); ?></h2><p><?=$coordinate['hour']?></p>`
             L.marker([<?=$coordinate['latitude']?>, <?=$coordinate['longitude']?>], {icon: rowerIcon}).bindPopup(popupHtml).addTo(map).on('click', onPinClick)
         <?php endforeach ?>
         pointsForJson .push([<?=$voyage['longitude']?>, <?=$voyage['latitude']?>])
@@ -567,8 +585,6 @@
             smoothFactor: -1
         }).addTo(map);
         map.fitBounds(polyline.getBounds());
-
-        console.log(latAndLng);
 
         function lngLatArrayToLatLng(lngLatArray) {
             return lngLatArray.map(lngLatToLatLng);

@@ -195,7 +195,7 @@ h1 {
     top: 0;
     padding: 1em 0;
     text-align: center;
-    z-index: 100;
+    z-index: 1001;
 }
 
 .fixedHeader .social-media {
@@ -437,6 +437,17 @@ h1.logo span {
     background: #201e64;
     border: 2px solid white;
 }
+.news-img {
+    border-radius: 10px;
+    margin-top: 1em;
+    max-width: 90%;
+    -webkit-box-shadow: 0px 14px 74px -19px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 14px 74px -19px rgba(0,0,0,0.75);
+    box-shadow: 0px 14px 74px -19px rgba(0,0,0,0.75);
+}
+.leaflet-popup-content {
+    text-align: center;
+}
 .dynamic-section h2 {
     font-size: 20px;
     margin-bottom: .5em;
@@ -563,7 +574,6 @@ h1.logo span {
 
 #partners h1 {
     padding-bottom: 0;
-    margin-bottom: 10px;
 }
 
 #partners .custom-container {
@@ -598,6 +608,7 @@ h1.logo span {
 .partners-btn {
     justify-content: center;
     display: flex;
+    flex-wrap: wrap;
 }
 
 .btn-and-partners {
@@ -612,6 +623,10 @@ h1.logo span {
     overflow: hidden;
     display: flex;
     align-items: center;
+}
+
+#partner-10 img {
+    width: 100% !important;
 }
 
 .category-partner {
@@ -1105,7 +1120,23 @@ form {
     }
 
     #partners figure {
-        width: 46%;
+        width: 21%;
+    }
+    #partner-10 figure {
+        width: 40%;
+    }
+    .partners {
+        flex-wrap: wrap;
+        height: 340px;
+    }
+    .blue-btn {
+        margin: 10px 5px;
+    }
+    #partners figure img {
+        width: 100% !important;
+    }
+    .category-partner {
+        flex-wrap: wrap;
     }
 
     form .sm-w-100 {
@@ -1166,4 +1197,62 @@ form {
 .fast-fade-out {
     animation: fadeOut .2s;
     opacity: 0;
+}
+
+
+
+
+
+/* modal popup styles */
+.image-modal-content {
+    cursor: pointer;
+}
+.img-and-cross {
+    position: relative;
+}
+.image-modal-popup {
+    position: fixed;
+    overflow: auto;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    animation: 500ms fadeIn;
+    display: none;
+    z-index: 1500;
+}
+
+.image-modal-popup .wrapper {
+    max-width: fit-content;
+    margin: 30px auto 0 auto;
+    position: relative;
+    height: 90vh;
+    display: flex;
+    align-items: center;
+}
+
+.image-modal-popup .description {
+    text-align: center;
+}
+.image-modal-popup img {
+    width: 100%;
+    max-height: calc(100vh - 150px);
+    margin-bottom: 10px;
+}
+.image-modal-popup span {
+    position: absolute;
+    top: -25px;
+    right: -47px;
+    font-size: 4rem;
+    color: #e57520;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 900px) {
+    .image-modal-popup span {
+        top: -20px;
+        right: 4px;
+    }
 }

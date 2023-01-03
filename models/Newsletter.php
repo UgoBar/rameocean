@@ -3,54 +3,66 @@
 class Newsletter
 {
     private $dbh;
+    private $media;
 
-    public function __construct()
+    public function __construct($media)
     {
         $this->dbh = dbConnexion();
+        $this->media = $media;
     }
 
-    public function add($date, string $description)
+    public function add($date, string $description, string $picture, string $alt)
     {
 
         $this->dbh->setAttribute(PDO::ATTR_EMULATE_PREPARES, true);
+        $lastInsertMediaId = $this->media->add($picture, $alt);
 
         $stm = $this->dbh->prepare (
-            "INSERT INTO ro_newsletter (date, description)
-                    VALUES (:date, :description)"
+            "INSERT INTO ro_newsletter (date, description, media_id)
+                    VALUES (:date, :description, :media_id)"
         );
 
         $stm->bindValue('date', $date);
         $stm->bindValue('description', $description);
+        $stm->bindValue('media_id', $lastInsertMediaId);
         $stm->execute();
 
         return $this->dbh->lastInsertId();
     }
 
-    public function update(int $newsId, $date, string $description)
+    public function update(int $newsId, $date, string $description, string $picture, string $alt)
     {
         $this->dbh->setAttribute(PDO::ATTR_EMULATE_PREPARES, true);
+        $mediaId = $this->findMediaId($newsId);
 
         $stm = $this->dbh->prepare("
+            UPDATE ro_media m SET m.picture = :picture, m.alt = :alt WHERE m.id = :mediaId; 
             UPDATE ro_newsletter n SET n.date = :date, n.description = :description WHERE n.id = :newsId;
         ");
+
+        $stm->bindValue('mediaId', $mediaId, PDO::PARAM_INT);
+        $stm->bindValue('picture', $picture);
+        $stm->bindValue('alt', $alt);
 
         $stm->bindValue('newsId', $newsId, PDO::PARAM_INT);
         $stm->bindValue('date', $date);
         $stm->bindValue('description', $description);
         $stm->execute();
 
-        $stm->execute();
         return $this->dbh->lastInsertId();
     }
 
     public function delete(int $newsId)
     {
         $this->dbh->setAttribute(PDO::ATTR_EMULATE_PREPARES, true);
+        $mediaId = $this->findMediaId($newsId);
 
         $stm = $this->dbh->prepare("
             DELETE FROM ro_newsletter WHERE id = :newsId;
+            DELETE FROM ro_media where id = :mediaId;
         ");
         $stm->bindValue('newsId', $newsId);
+        $stm->bindValue('mediaId', $mediaId);
 
         $stm->execute();
     }
@@ -60,8 +72,9 @@ class Newsletter
         $this->dbh->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
 
         $stm = $this->dbh->prepare("
-            SELECT *
+            SELECT n.id, n.date, n.description, n.media_id, m.picture, m.alt
             FROM ro_newsletter n
+            LEFT JOIN ro_media m ON n.media_id = m.id
             ORDER BY n.date DESC;
         ");
 
@@ -72,13 +85,20 @@ class Newsletter
     public function findById(int $id)
     {
         $stm = $this->dbh->prepare("
-            SELECT *
+            SELECT n.id, n.date, n.description, n.media_id, m.picture, m.alt
             FROM ro_newsletter n
+            LEFT JOIN ro_media m ON n.media_id = m.id
             WHERE n.id = :id
         ");
 
         $stm->bindValue('id', $id);
         $stm->execute();
         return $stm->fetch();
+    }
+
+    public function findMediaId(int $newsId)
+    {
+        $currentNews = $this->findById($newsId);
+        return $currentNews['media_id'];
     }
 }
