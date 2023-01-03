@@ -943,7 +943,7 @@ form {
         position: fixed;
         top: -100vh;
         left: 0;
-        z-index: 100;
+        z-index: 1500;
         -webkit-box-shadow: 0px 14px 74px -19px rgba(0,0,0,0.75);
         -moz-box-shadow: 0px 14px 74px -19px rgba(0,0,0,0.75);
         box-shadow: 0px 14px 74px -19px rgba(0,0,0,0.75);

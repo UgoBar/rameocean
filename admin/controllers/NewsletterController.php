@@ -21,7 +21,7 @@ class NewsletterController extends DefaultController
             if (isset($_POST['delete-newsletter-' . $newsletter['id']])) {
                 $id      = (int)$_POST['delete-newsletter-' . $newsletter['id']];
                 $picture = $_POST['picture-' . $newsletter['id']];
-                $this -> deleteFile($picture, 'rower');
+                $this -> deleteFile($picture, 'newsletter');
                 $this -> newsletter -> delete($id);
                 header('Location:index.php?name=news');
             }
