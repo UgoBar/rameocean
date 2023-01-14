@@ -14,7 +14,7 @@
                             </div>
                         </div>
                         <div class="col-11">
-                            <h4 class="date"><?= strftime("%A %d %B %G", strtotime($newsletter['date'])) ?></h4>
+                            <h4 class="date"><?= utf8_encode(strftime("%A %d %B %G", strtotime($newsletter['date']))) ?></h4>
                             <?=$newsletter['description']?>
                         </div>
                     </div>

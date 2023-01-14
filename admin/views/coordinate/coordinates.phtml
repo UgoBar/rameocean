@@ -36,6 +36,7 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                                <input type="hidden" name="picture-<?=$coordinate['id']?>" value="<?=$coordinate['picture']?>"/>
                                 <button type="submit" name="delete-coordinate-<?=$coordinate['id']?>" class="btn btn-danger" value="<?=$coordinate['id']?>">Supprimer</button>
                             </div>
                         </div>
