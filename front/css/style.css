@@ -28,6 +28,30 @@ h1 {
     padding-bottom: 1em;
 }
 
+.analytic-header {
+    background-color: #1b1953;
+    color: white;
+    padding: 17px 0;
+    text-align: center;
+}
+.analytic-header h2 {
+    font-size: 21px !important;
+    color: #fff;
+    text-transform: uppercase;
+    font-weight: bold;
+    padding-bottom: 0;
+}
+.analytics img {
+    width: 100%;
+}
+.crowdfunding-link {
+    margin-top: 1em;
+    text-align: center;
+}
+.crowdfunding-link p {
+    font-size: 18px;
+}
+
 .text-marine {
     color: #14133A;
 }
@@ -1101,6 +1125,9 @@ form {
         width: 112%;
         right: -20px;
         bottom: -52px;
+    }
+    .crowdfunding-link .bevel-btn {
+        position: initial;
     }
 
     #patrick {
