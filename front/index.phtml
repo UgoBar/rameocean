@@ -215,6 +215,7 @@
                                         <?php if($news['picture']):?>
                                             <div class="image-modal-content">
                                                 <img class="news-img" src="uploads/newsletter/<?=$news['picture']?>" alt="<?=$news['alt']?>"/>
+                                                <div class="backdrop-overlay news-img" data-src="uploads/newsletter/<?=$news['picture']?>"><i class="icon-zoomin" aria-hidden="true"></i></div>
                                             </div>
                                         <?php endif ?>
                                     </div>
@@ -224,6 +225,7 @@
                                 <div class="rower-header">
                                     <figure class="image-modal-content">
                                         <img class="active" src="" alt="" data-bs-target="#staticBackdrop">
+                                        <div class="backdrop-overlay" style="border-radius: 50%" data-src=""><i class="icon-zoomin" aria-hidden="true"></i></div>
                                     </figure>
                                     <div>
                                         <h2 class="mb-0"></h2>
@@ -240,7 +242,7 @@
                 <?php if($lastAnalytic['picture']):?>
                     <div class="analytics">
                         <div class="analytic-header">
-                            <h2>Analyse</h2>
+                            <h2>Statistiques</h2>
                             <p class="mb-0"><?= utf8_encode(strftime("%A %d %B %G", strtotime($lastAnalytic['date']))); ?> - <?=$lastAnalytic['hour']?></p>
                         </div>
                         <figure class="image-modal-content">

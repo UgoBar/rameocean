@@ -85,7 +85,6 @@ dots.click(function(){
         matchedPara = paras.eq(index);
 
     if(matchedPara.find('div.media').length === 0) {
-        console.log('pas de photo')
         matchedPara.find('div.text').css({'width':'100%'})
     }
     // t.add(matchedPara).addClass('active fade-in');
@@ -147,7 +146,7 @@ const avatars     = document.querySelectorAll('.avatar');
 
 // --------------------------------------------------- MODAL FOR IMAGES
 // all images inside the image modal content class
-const lightboxImages = document.querySelectorAll('.image-modal-content img');
+const lightboxImages = document.querySelectorAll('.backdrop-overlay');
 const body = document.querySelector('body');
 const modalPopup = document.querySelector('.image-modal-popup');
 
@@ -166,11 +165,11 @@ document.addEventListener('click', (event) => {
 });
 
 // loops over each modal content img and adds click event functionality
-lightboxImages.forEach(img => {
-    img.addEventListener('click', e => {
+lightboxImages.forEach(backdrop => {
+    backdrop.addEventListener('click', e => {
         body.style.overflow = 'hidden';
         modalPopup.style.display = 'block';
-        document.querySelector(`.image-modal-popup img`).src = img.src;
+        document.querySelector(`.image-modal-popup img`).src = backdrop.dataset.src;
     });
 });
 // --------------------------------------------------- END MODAL FOR IMAGES
@@ -239,6 +238,7 @@ const displayNews = () => {
 
 function setRowerInfo(img, name, age, job, description) {
     rowerHeader.querySelector('img').src = 'uploads/rower/' + img;
+    rowerHeader.querySelector('.backdrop-overlay').dataset.src = 'uploads/rower/' + img;
     rowerHeader.querySelector('h2').innerHTML = name;
     rowerHeader.querySelector('.age').innerHTML = age;
     rowerHeader.querySelector('.job').innerHTML = job;

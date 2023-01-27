@@ -29,14 +29,14 @@ h1 {
 }
 
 .analytic-header {
-    background-color: #1b1953;
-    color: white;
+    /*background-color: #1b1953;*/
+    color: #1b1953;
     padding: 17px 0;
     text-align: center;
 }
 .analytic-header h2 {
-    font-size: 21px !important;
-    color: #fff;
+    font-size: 30px !important;
+    color: #1b1953;
     text-transform: uppercase;
     font-weight: bold;
     padding-bottom: 0;
@@ -398,7 +398,7 @@ h1.logo span {
     margin: 0 1em;
     cursor: pointer;
 }
-.avatar.active {
+.avatar.active, .avatar:hover {
     border: 2px solid white;
 }
 
@@ -407,12 +407,12 @@ h1.logo span {
 }
 .dynamic-section {
     padding: 27px;
-    width: 35%;
+    width: 41%;
     -webkit-box-shadow: inset 0px 15px 42px -18px rgba(0,0,0,0.75);
     -moz-box-shadow: inset 0px 15px 42px -18px rgba(0,0,0,0.75);
     box-shadow: inset 0px 15px 42px -18px rgba(0,0,0,0.75);
     overflow-x: hidden;
-    height: 50vh;
+    height: 60vh;
     position: relative;
 }
 .scrollbar-hidden {
@@ -464,7 +464,7 @@ h1.logo span {
 .news-img {
     border-radius: 10px;
     margin-top: 1em;
-    max-width: 90%;
+    max-width: 100%;
     -webkit-box-shadow: 0px 14px 74px -19px rgba(0,0,0,0.75);
     -moz-box-shadow: 0px 14px 74px -19px rgba(0,0,0,0.75);
     box-shadow: 0px 14px 74px -19px rgba(0,0,0,0.75);
@@ -510,7 +510,7 @@ h1.logo span {
 }
 
 #map {
-    width: 65%;
+    width: 59%;
 }
 
 /** INCOMING **/
@@ -1226,14 +1226,36 @@ form {
     opacity: 0;
 }
 
-
-
-
+.backdrop-overlay {
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.5);
+    margin-top: 0;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 50px;
+    opacity: 0;
+    transition: all .2s ease-in-out;
+}
+.backdrop-overlay:hover {
+    opacity: 1;
+}
+.rower-header .icon-zoomin {
+    font-size: 60%;
+}
 
 /* modal popup styles */
 .image-modal-content {
     cursor: pointer;
+    position: relative;
 }
+/*.image-modal-content:hover {*/
+/*    */
+/*}*/
 .img-and-cross {
     position: relative;
 }
