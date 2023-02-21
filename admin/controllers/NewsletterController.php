@@ -77,7 +77,8 @@ class NewsletterController extends DefaultController
 
             if (empty($errors)) {
 
-                $picture = $this->keepOrReplacePicture($picture, $oldPicture, 'newsletter');
+                if($picture !== null)
+                    $picture = $this->keepOrReplacePicture($picture, $oldPicture, 'newsletter');
 
                 if (!$id) {
                     $this -> newsletter -> add($date, $description, $picture, $alt);

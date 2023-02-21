@@ -11,11 +11,10 @@ class Newsletter
         $this->media = $media;
     }
 
-    public function add($date, string $description, string $picture, string $alt)
+    public function add($date, string $description, ?string $picture = null, ?string $alt = null)
     {
 
         $this->dbh->setAttribute(PDO::ATTR_EMULATE_PREPARES, true);
-        $lastInsertMediaId = $this->media->add($picture, $alt);
 
         $stm = $this->dbh->prepare (
             "INSERT INTO ro_newsletter (date, description, media_id)
@@ -24,25 +23,34 @@ class Newsletter
 
         $stm->bindValue('date', $date);
         $stm->bindValue('description', $description);
-        $stm->bindValue('media_id', $lastInsertMediaId);
+
+        if($picture !== null) {
+            $lastInsertMediaId = $this->media->add($picture, $alt);
+            $stm->bindValue('media_id', $lastInsertMediaId);
+        } else {
+            $stm->bindValue('media_id', null);
+        }
+
         $stm->execute();
 
         return $this->dbh->lastInsertId();
     }
 
-    public function update(int $newsId, $date, string $description, string $picture, string $alt)
+    public function update(int $newsId, $date, string $description, ?string $picture = null, ?string $alt = null)
     {
         $this->dbh->setAttribute(PDO::ATTR_EMULATE_PREPARES, true);
-        $mediaId = $this->findMediaId($newsId);
 
-        $stm = $this->dbh->prepare("
-            UPDATE ro_media m SET m.picture = :picture, m.alt = :alt WHERE m.id = :mediaId; 
-            UPDATE ro_newsletter n SET n.date = :date, n.description = :description WHERE n.id = :newsId;
-        ");
+        $queryPicture = "UPDATE ro_media m SET m.picture = :picture, m.alt = :alt WHERE m.id = :mediaId;";
+        $queryNews = "UPDATE ro_newsletter n SET n.date = :date, n.description = :description WHERE n.id = :newsId;";
 
-        $stm->bindValue('mediaId', $mediaId, PDO::PARAM_INT);
-        $stm->bindValue('picture', $picture);
-        $stm->bindValue('alt', $alt);
+        $stm = $this->dbh->prepare($picture !== null ? $queryPicture . $queryNews : $queryNews);
+
+        if($picture !== null) {
+            $mediaId = $this->findMediaId($newsId);
+            $stm->bindValue('mediaId', $mediaId, PDO::PARAM_INT);
+            $stm->bindValue('picture', $picture);
+            $stm->bindValue('alt', $alt);
+        }
 
         $stm->bindValue('newsId', $newsId, PDO::PARAM_INT);
         $stm->bindValue('date', $date);

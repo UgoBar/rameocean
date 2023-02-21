@@ -11,11 +11,10 @@ class Coordinate
         $this->media = $media;
     }
 
-    public function add($date, string $hour, $lat, $lon, string $picture, string $alt)
+    public function add($date, string $hour, $lat, $lon, ?string $picture = null, ?string $alt = null)
     {
 
         $this->dbh->setAttribute(PDO::ATTR_EMULATE_PREPARES, true);
-        $lastInsertMediaId = $this->media->add($picture, $alt);
 
         $stm = $this->dbh->prepare (
             "INSERT INTO ro_coordinate (date, hour, latitude, longitude, media_id)
@@ -26,25 +25,34 @@ class Coordinate
         $stm->bindValue('hour', $hour);
         $stm->bindValue('lat', $lat);
         $stm->bindValue('lon', $lon);
-        $stm->bindValue('media_id', $lastInsertMediaId);
+
+        if($picture !== null) {
+            $lastInsertMediaId = $this->media->add($picture, $alt);
+            $stm->bindValue('media_id', $lastInsertMediaId);
+        } else {
+            $stm->bindValue('media_id', null);
+        }
+
         $stm->execute();
 
         return $this->dbh->lastInsertId();
     }
 
-    public function update(int $coordinateId, $date, string $hour, $lat, $lon, string $picture, string $alt)
+    public function update(int $coordinateId, $date, string $hour, $lat, $lon, ?string $picture = null, ?string $alt = null)
     {
         $this->dbh->setAttribute(PDO::ATTR_EMULATE_PREPARES, true);
-        $mediaId = $this->findMediaId($coordinateId);
 
-        $stm = $this->dbh->prepare("
-            UPDATE ro_media m SET m.picture = :picture, m.alt = :alt WHERE m.id = :mediaId;
-            UPDATE ro_coordinate c SET c.date = :date, c.hour = :hour, c.latitude = :lat, c.longitude = :lon WHERE c.id = :coordinateId;
-        ");
+        $queryPicture = "UPDATE ro_media m SET m.picture = :picture, m.alt = :alt WHERE m.id = :mediaId;";
+        $queryNews = "UPDATE ro_coordinate c SET c.date = :date, c.hour = :hour, c.latitude = :lat, c.longitude = :lon WHERE c.id = :coordinateId;";
 
-        $stm->bindValue('mediaId', $mediaId, PDO::PARAM_INT);
-        $stm->bindValue('picture', $picture);
-        $stm->bindValue('alt', $alt);
+        $stm = $this->dbh->prepare($picture !== null ? $queryPicture . $queryNews : $queryNews);
+
+        if($picture !== null) {
+            $mediaId = $this->findMediaId($coordinateId);
+            $stm->bindValue('mediaId', $mediaId, PDO::PARAM_INT);
+            $stm->bindValue('picture', $picture);
+            $stm->bindValue('alt', $alt);
+        }
 
         $stm->bindValue('coordinateId', $coordinateId, PDO::PARAM_INT);
         $stm->bindValue('date', $date);

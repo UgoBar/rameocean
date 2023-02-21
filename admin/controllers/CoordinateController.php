@@ -86,8 +86,8 @@ class CoordinateController extends DefaultController
             }
 
             if (empty($errors)) {
-
-                $picture = $this->keepOrReplacePicture($picture, $oldPicture, 'coordinate');
+                if($picture !== null)
+                    $picture = $this->keepOrReplacePicture($picture, $oldPicture, 'coordinate');
 
                 if (!$id) {
                     $this -> coordinate -> add($date, $hour, $latitude, $longitude, $picture, $alt);
